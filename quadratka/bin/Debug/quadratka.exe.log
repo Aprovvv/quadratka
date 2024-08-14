@@ -182,3 +182,395 @@ Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka
 Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042C34C в функции solve_equation() в файле C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c на строке 41 в модуле C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: Cmdre0, Thread: 0x10C4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C34C in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: solve_equation() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (41):
+
+     39:      }
+     40:      //случай 1 корень
+=>   41:      if (sqrt(D)/a<0.001)//пренебрегаем разницей между корнями порядка 10^-3
+     42:      {
+     43:         double x = -b/(2*a);
+
+# 1 0x0042C290 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: main() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (20):
+
+     18:     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+     19:     {
+=>   20:         solve_equation(a_coef, b_coef, c_coef);
+     21:         printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+     22:         printf("Для завершения введите любой нечисловой символ\n");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 14 2024 20:04:09, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 14 2024 20:04:15
+
+Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe
+Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042C34C в функции solve_equation() в файле C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c на строке 41 в модуле C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: Cmdre0, Thread: 0x10C4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C34C in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: solve_equation() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (41):
+
+     39:      }
+     40:      //случай 1 корень
+=>   41:      if (sqrt(D)/a<0.001)//пренебрегаем разницей между корнями порядка 10^-3
+     42:      {
+     43:         double x = -b/(2*a);
+
+# 1 0x0042C290 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: main() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (20):
+
+     18:     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+     19:     {
+=>   20:         solve_equation(a_coef, b_coef, c_coef);
+     21:         printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+     22:         printf("Для завершения введите любой нечисловой символ\n");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 14 2024 20:04:09, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 14 2024 20:04:14
+
+Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe
+Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042C34C в функции solve_equation() в файле C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c на строке 58 в модуле C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: Cmdre0, Thread: 0x5674 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C34C in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: solve_equation() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (58):
+
+     56:      }
+     57:      //случай 1 корень
+=>   58:      if (sqrt(D)/a == 1./0)
+     59:      {
+     60:         return;
+
+# 1 0x0042C290 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: main() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (20):
+
+     18:     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+     19:     {
+=>   20:         solve_equation(a_coef, b_coef, c_coef);
+     21:         printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+     22:         printf("Для завершения введите любой нечисловой символ\n");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 14 2024 20:26:35, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 14 2024 20:26:41
+
+Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe
+Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042C34C в функции solve_equation() в файле C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c на строке 58 в модуле C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: Cmdre0, Thread: 0x5674 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C34C in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: solve_equation() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (58):
+
+     56:      }
+     57:      //случай 1 корень
+=>   58:      if (sqrt(D)/a == 1./0)
+     59:      {
+     60:         return;
+
+# 1 0x0042C290 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: main() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (20):
+
+     18:     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+     19:     {
+=>   20:         solve_equation(a_coef, b_coef, c_coef);
+     21:         printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+     22:         printf("Для завершения введите любой нечисловой символ\n");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 14 2024 20:26:35, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 14 2024 20:26:40
+
+Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe
+Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042C34C в функции solve_equation() в файле C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c на строке 58 в модуле C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: Cmdre0, Thread: 0x312C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C34C in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: solve_equation() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (58):
+
+     56:      }
+     57:      //случай 1 корень
+=>   58:      if (sqrt(D)/a == 1./0)
+     59:      {
+     60:         return;
+
+# 1 0x0042C290 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: main() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (20):
+
+     18:     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+     19:     {
+=>   20:         solve_equation(a_coef, b_coef, c_coef);
+     21:         printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+     22:         printf("Для завершения введите любой нечисловой символ\n");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 14 2024 20:26:59, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 14 2024 20:27:05
+
+Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe
+Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042C34C в функции solve_equation() в файле C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c на строке 58 в модуле C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: Cmdre0, Thread: 0x312C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C34C in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: solve_equation() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (58):
+
+     56:      }
+     57:      //случай 1 корень
+=>   58:      if (sqrt(D)/a == 1./0)
+     59:      {
+     60:         return;
+
+# 1 0x0042C290 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: main() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (20):
+
+     18:     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+     19:     {
+=>   20:         solve_equation(a_coef, b_coef, c_coef);
+     21:         printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+     22:         printf("Для завершения введите любой нечисловой символ\n");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 14 2024 20:26:59, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 14 2024 20:27:05
+
+Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe
+Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042C356 в функции solve_equation() в файле C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c на строке 58 в модуле C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: Cmdre0, Thread: 0x561C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C356 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: solve_equation() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (58):
+
+     56:      }
+     57:      //случай 1 корень
+=>   58:      if (!isfinite(sqrt(D)/a))
+     59:      {
+     60:         return;
+
+# 1 0x0042C290 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: main() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (20):
+
+     18:     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+     19:     {
+=>   20:         solve_equation(a_coef, b_coef, c_coef);
+     21:         printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+     22:         printf("Для завершения введите любой нечисловой символ\n");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 14 2024 20:43:45, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 14 2024 20:43:52
+
+Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe
+Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042C356 в функции solve_equation() в файле C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c на строке 58 в модуле C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: Cmdre0, Thread: 0x561C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C356 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: solve_equation() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (58):
+
+     56:      }
+     57:      //случай 1 корень
+=>   58:      if (!isfinite(sqrt(D)/a))
+     59:      {
+     60:         return;
+
+# 1 0x0042C290 in C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe: main() at C:/Users/user/Documents/GitHub/quadratka/quadratka/main.c (20):
+
+     18:     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+     19:     {
+=>   20:         solve_equation(a_coef, b_coef, c_coef);
+     21:         printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+     22:         printf("Для завершения введите любой нечисловой символ\n");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 14 2024 20:43:45, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 14 2024 20:43:51
+
+Run file:	C:\Users\user\Documents\GitHub\quadratka\quadratka\bin\Debug\quadratka.exe
+Directory:	C:\Users\user\Documents\GitHub\quadratka\quadratka
+
+--------------------------------------------------
