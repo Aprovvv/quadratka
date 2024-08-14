@@ -36,8 +36,8 @@ void solve_equation(double a, double b, double c)
         return;
      }
      double x1, x2;
-     x1 = (-b - sqrt(D))/2;
-     x2 = (-b + sqrt(D))/2;
+     x1 = (-b - sqrt(D))/2/a;
+     x2 = (-b + sqrt(D))/2/a;
      printf("Уравнение имеет два корня:\n");
      printf("x1 = %.4f\n", x1);
      printf("x2 = %.4f\n", x2);
