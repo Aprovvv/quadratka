@@ -28,9 +28,8 @@ int main()
 void solve_equation(double a, double b, double c)//функция, которая решает уравнение
 {
     // объявление переменных
-     double D;
+     double D = b*b - 4*a*c;
 
-     D = b*b - 4*a*c;
      //случай нет корней
      if (D<0)
      {
@@ -51,16 +50,16 @@ void solve_equation(double a, double b, double c)//функция, которая решает уравн
         {
             double x = -c/b;
             printf("Уравнение имеет один корень\n");
-            printf("x = %.3g\n\n", x);
+            printf("x = %.3f\n\n", x);
         }
         return;
      }
      //случай 1 корень
-     if (sqrt(D)/a<0.001)//пренебрегаем разницей между корнями порядка 10^-3
+     if (sqrt(D)/a<0.001)//пренебрегаем разницей между корнями порядка 10^-3, т.к. выводим с такой точностью
      {
         double x = -b/(2*a);
         printf("Дискриминант равен нулю. Уравнение имеет один корень\n");
-        printf("x = %.4g\n\n", x);
+        printf("x = %.3f\n\n", x);
         return;
      }
      //случай 2 корня
@@ -68,6 +67,6 @@ void solve_equation(double a, double b, double c)//функция, которая решает уравн
      x1 = (-b - sqrt(D))/2/a;
      x2 = (-b + sqrt(D))/2/a;
      printf("Уравнение имеет два корня:\n");
-     printf("x1 = %.3g\n", x1);
-     printf("x2 = %.3g\n\n", x2);
+     printf("x1 = %.3f\n", x1);
+     printf("x2 = %.3f\n\n", x2);
 }
