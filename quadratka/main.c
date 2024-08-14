@@ -5,21 +5,20 @@
 
 //прототипы функций
 void solve_equation(double a, double b, double c);//функция, которая решает уравнение
+void print_menu(void);
 
 int main()
 {
     //объявление переменных
-    double a_coef, b_coef, c_coef;
+    double a_coef=0, b_coef=0, c_coef=0;
 
-    printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
-    printf("Для завершения введите любой нечисловой символ\n");
+    print_menu();
 
     //ввод значений
     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
     {
         solve_equation(a_coef, b_coef, c_coef);
-        printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
-        printf("Для завершения введите любой нечисловой символ\n");
+        print_menu();
     }
 
     return 0;
@@ -69,4 +68,10 @@ void solve_equation(double a, double b, double c)//функция, которая решает уравн
      printf("Уравнение имеет два корня:\n");
      printf("x1 = %.3f\n", x1);
      printf("x2 = %.3f\n\n", x2);
+}
+
+void print_menu(void)
+{
+    printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
+    printf("Для завершения введите любой нечисловой символ\n");
 }
