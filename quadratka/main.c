@@ -3,75 +3,93 @@
 #include <TXLib.h>
 #include <math.h>
 
-//прототипы функций
-void solve_equation(double a, double b, double c);//функция, которая решает уравнение
-void print_menu(void);
+int solve_equation(double a, double b, double c, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней (3 = бесконечно)
+void print_menu(void);//функция которая выдает приглашение на ввод
+void print_roots(int count, double x1_adress, double x2_adress);//функция которая печатает корни
 
 int main()
 {
-    //объявление переменных
     double a_coef=0, b_coef=0, c_coef=0;
+    double x1 = 0, x2 = 0;
+    int count = 0;
 
     print_menu();
 
-    //ввод значений
     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
     {
-        solve_equation(a_coef, b_coef, c_coef);
+        count = solve_equation(a_coef, b_coef, c_coef, &x1, &x2);
+        print_roots(count, x1, x2);
         print_menu();
     }
 
     return 0;
 }
 
-void solve_equation(double a, double b, double c)//функция, которая решает уравнение
+//функция, которая решает уравнение и возвращает количество корней (3 = бесконечность).
+//Переменные записываются по адресам х1 и х2
+//Если корень 1, то он записывается в х1
+int solve_equation(double a, double b, double c, double *x1_adress, double *x2_adress)
 {
-    // объявление переменных
      double D = b*b - 4*a*c;
 
      //случай нет корней
      if (D<0)
-     {
-        printf("Дискриминант меньше нуля. Нет корней\n\n");
-        return;
-     }
+        return 0;
      //случай нулевых коэффициентов
      if (fabs(a)<1e-7)
      {
         if (fabs(b)<1e-7)
         {
             if (fabs(c)<1e-7)
-                printf("Любое число является решением\n\n");
+                return 3;
             else
-                printf("Нет корней\n\n");
+                return 0;
         }
         else
         {
-            double x = -c/b;
-            printf("Уравнение имеет один корень\n");
-            printf("x = %.3f\n\n", x);
+            *x1_adress = -c/b;
+            return 1;
         }
-        return;
      }
      //случай 1 корень
      if (sqrt(D)/a<0.001)//пренебрегаем разницей между корнями порядка 10^-3, т.к. выводим с такой точностью
      {
-        double x = -b/(2*a);
-        printf("Дискриминант равен нулю. Уравнение имеет один корень\n");
-        printf("x = %.3f\n\n", x);
-        return;
+        *x1_adress = -b/(2*a);
+        return 1;
      }
      //случай 2 корня
-     double x1, x2;
-     x1 = (-b - sqrt(D))/2/a;
-     x2 = (-b + sqrt(D))/2/a;
-     printf("Уравнение имеет два корня:\n");
-     printf("x1 = %.3f\n", x1);
-     printf("x2 = %.3f\n\n", x2);
+     *x1_adress = (-b - sqrt(D))/2/a;
+     *x2_adress = (-b + sqrt(D))/2/a;
+     return 2;
 }
 
-void print_menu(void)
+void print_menu(void)//функция которая выдает приглашение на ввод
 {
     printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
     printf("Для завершения введите любой нечисловой символ\n");
+}
+
+void print_roots(int count, double x1, double x2)//функция которая печатает корни
+{
+    switch (count)
+    {
+    case 0:
+        printf("Нет корней\n\n");
+        break;
+    case 1:
+        printf("Уравнение имеет один корень:\n");
+        printf("x = %.3f\n\n", x1);
+        break;
+    case 2:
+        printf("Уравнение имеет два корня:\n");
+        printf("x1 = %.3f\n", x1);
+        printf("x2 = %.3f\n\n", x2);
+        break;
+    case 3:
+        printf("Любое число является решением\n\n");
+        break;
+    default:
+        printf("Я не знаю как, но вы сломали программу");
+        break;
+    }
 }
