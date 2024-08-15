@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <locale.h>
 
-#define INF_ROOTS -1 //возвращаемое значение solve_equation, если корней бесконечно много
+#define INF_ROOTS -1 //возвра щаемое значение solve_equation, если корней бесконечно много
 #define ROOT_SING_COUNT 3 //число знаков после запятой при выводе корней
 #define EPS_COEF 1e-7 //точность определения нулевых коэффициентов
 
