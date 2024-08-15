@@ -7,7 +7,7 @@ int solve_equation(double a, double b, double c, double *x1, double *x2);//функц
 void print_menu(void);//функция которая выдает приглашение на ввод
 void print_roots(int count, double x1_adress, double x2_adress);//функция которая печатает корни
 
-int main()
+int main()//коммент просто для примера
 {
     double a_coef=0, b_coef=0, c_coef=0;
     double x1 = 0, x2 = 0;
