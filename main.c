@@ -17,13 +17,11 @@ int main()
     double a_coef=0, b_coef=0, c_coef=0;
     double x1 = 0, x2 = 0;
     int count = 0;
-    char ch;
 
     print_menu();
 
     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
     {
-        printf("%f %f %f", a_coef, b_coef, c_coef);
         count = solve_equation(a_coef, b_coef, c_coef, &x1, &x2);
         print_roots(count, x1, x2);
         print_menu();
@@ -37,15 +35,15 @@ int main()
 //Если корень 1, то он записывается в х1
 int solve_equation(double a, double b, double c, double *x1_adress, double *x2_adress)
 {
-     double D = b*b - 4*a*c;
-     double sqrtD = sqrt(D);
+    double D = b*b - 4*a*c;
 
      //случай нет корней
-     if (D<0)
+    if (D<0)
         return 0;
-     //случай нулевых коэффициентов
-     if (!cmpdoubles(a, 0, EPS_COEF))
-     {
+    double sqrtD = sqrt(D);
+    //случай нулевых коэффициентов
+    if (!cmpdoubles(a, 0, EPS_COEF))
+    {
         if (!cmpdoubles(b, 0, EPS_COEF))
         {
             if (!cmpdoubles(c, 0, EPS_COEF))
@@ -53,22 +51,22 @@ int solve_equation(double a, double b, double c, double *x1_adress, double *x2_a
             else
                 return 0;
         }
-        else
-        {
-            *x1_adress = -c/b;
-            return 1;
-        }
-     }
-     //случай 1 корень
-     if (!cmpdoubles(sqrtD/a, 0, pow(10, -ROOT_SING_COUNT)))//пренебрегаем разницей между корнями порядка 10^-ROOT_SING_COUNT, т.к. выводим с такой точностью
-     {
+    else
+    {
+        *x1_adress = -c/b;
+        return 1;
+    }
+    }
+    //случай 1 корень
+    if (!cmpdoubles(sqrtD/a, 0, pow(10, -ROOT_SING_COUNT)))//пренебрегаем разницей между корнями порядка 10^-ROOT_SING_COUNT, т.к. выводим с такой точностью
+    {
         *x1_adress = -b/(2*a);
         return 1;
-     }
-     //случай 2 корня
-     *x1_adress = (-b - sqrtD)/2/a;
-     *x2_adress = (-b + sqrtD)/2/a;
-     return 2;
+    }
+    //случай 2 корня
+    *x1_adress = (-b - sqrtD)/2/a;
+    *x2_adress = (-b + sqrtD)/2/a;
+    return 2;
 }
 
 void print_menu(void)//функция которая выдает приглашение на ввод
