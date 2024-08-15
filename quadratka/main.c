@@ -11,7 +11,7 @@
 int solve_equation(double a, double b, double c, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней
 void print_menu(void);//функция которая выдает приглашение на ввод
 void print_roots(int count, double x1, double x2);//функция которая печатает корни
-bool eqdoubles(double a, double b, double eps);//функция для сравнения double с заданной точностью
+bool eqdoubles(double a, double b, double eps);//функция для сравнения даблов с заданной точностью
 
 int main()
 {
