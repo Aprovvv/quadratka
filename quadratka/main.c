@@ -1,17 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <TXLib.h>
 #include <math.h>
+#include <stdbool.h>
+#include <locale.h>
 
-int solve_equation(double a, double b, double c, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней (3 = бесконечно)
+#define INF_ROOTS -1 //возвращаемое значение solve_equation, если корней бесконечно много
+#define ROOT_SING_COUNT 3 //число знаков после запятой при выводе корней
+#define EPS_COEF 1e-7 //точность определения нулевых коэффициентов
+
+int solve_equation(double a, double b, double c, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней
 void print_menu(void);//функция которая выдает приглашение на ввод
-void print_roots(int count, double x1_adress, double x2_adress);//функция которая печатает корни
+void print_roots(int count, double x1, double x2);//функция которая печатает корни
+bool eqdoubles(double a, double b, double eps);//функция для сравнения даблов с заданной точностью
 
-int main()//коммент просто для примера
+int main()
 {
     double a_coef=0, b_coef=0, c_coef=0;
     double x1 = 0, x2 = 0;
     int count = 0;
+
+    setlocale(LC_ALL, "RUS");
 
     print_menu();
 
@@ -25,23 +33,24 @@ int main()//коммент просто для примера
     return 0;
 }
 
-//функция, которая решает уравнение и возвращает количество корней (3 = бесконечность).
+//функция, которая решает уравнение и возвращает количество корней
 //Переменные записываются по адресам х1 и х2
 //Если корень 1, то он записывается в х1
 int solve_equation(double a, double b, double c, double *x1_adress, double *x2_adress)
 {
      double D = b*b - 4*a*c;
+     double sqrtD = sqrt(D);
 
      //случай нет корней
      if (D<0)
         return 0;
      //случай нулевых коэффициентов
-     if (fabs(a)<1e-7)
+     if (eqdoubles(a, 0, EPS_COEF))
      {
-        if (fabs(b)<1e-7)
+        if (eqdoubles(b, 0, EPS_COEF))
         {
-            if (fabs(c)<1e-7)
-                return 3;
+            if (eqdoubles(c, 0, EPS_COEF))
+                return INF_ROOTS;
             else
                 return 0;
         }
@@ -52,14 +61,14 @@ int solve_equation(double a, double b, double c, double *x1_adress, double *x2_a
         }
      }
      //случай 1 корень
-     if (sqrt(D)/a<0.001)//пренебрегаем разницей между корнями порядка 10^-3, т.к. выводим с такой точностью
+     if (eqdoubles(sqrtD/a, 0, pow(10, -ROOT_SING_COUNT)))//пренебрегаем разницей между корнями порядка 10^-ROOT_SING_COUNT, т.к. выводим с такой точностью
      {
         *x1_adress = -b/(2*a);
         return 1;
      }
      //случай 2 корня
-     *x1_adress = (-b - sqrt(D))/2/a;
-     *x2_adress = (-b + sqrt(D))/2/a;
+     *x1_adress = (-b - sqrtD)/2/a;
+     *x2_adress = (-b + sqrtD)/2/a;
      return 2;
 }
 
@@ -78,18 +87,23 @@ void print_roots(int count, double x1, double x2)//функция которая печатает корн
         break;
     case 1:
         printf("Уравнение имеет один корень:\n");
-        printf("x = %.3f\n\n", x1);
+        printf("x = %.*f\n\n", ROOT_SING_COUNT, x1);
         break;
     case 2:
         printf("Уравнение имеет два корня:\n");
-        printf("x1 = %.3f\n", x1);
-        printf("x2 = %.3f\n\n", x2);
+        printf("x1 = %.*f\n", ROOT_SING_COUNT, x1);
+        printf("x2 = %.*f\n\n", ROOT_SING_COUNT, x2);
         break;
-    case 3:
+    case INF_ROOTS:
         printf("Любое число является решением\n\n");
         break;
     default:
         printf("Я не знаю как, но вы сломали программу");
         break;
     }
+}
+
+bool eqdoubles(double a, double b, double eps)//функция для сравнения даблов с заданной точностью
+{
+    return (fabs(a-b)<eps);
 }
