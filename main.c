@@ -3,9 +3,9 @@
 #include <math.h>
 #include <TXLib.h>
 
-#define INF_ROOTS -1 //возвращаемое значение solve_equation, если корней бесконечно много
-#define ROOT_SING_COUNT 3 //число знаков после запятой при выводе корней
-#define EPS_COEF 1e-7 //точность определения нулевых коэффициентов
+const int INF_ROOTS = -1; //возвращаемое значение solve_equation, если корней бесконечно много
+const int ROOT_SING_COUNT = 3; //число знаков после запятой при выводе корней
+const double EPS_COEF = 1e-7; //точность определения нулевых коэффициентов
 
 int solve_equation(double a, double b, double c, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней
 void print_menu(void);//функция которая выдает приглашение на ввод
