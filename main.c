@@ -14,7 +14,7 @@ int cmpdoubles(double a, double b, double eps);//функция для срав�
 
 int main()
 {
-    double a_coef=0, b_coef=0, c_coef=0;
+    double a_coef = 0, b_coef = 0, c_coef = 0;
     double x1 = 0, x2 = 0;
     int count = 0;
 
@@ -38,15 +38,15 @@ int solve_equation(double a, double b, double c, double *x1_adress, double *x2_a
     double D = b*b - 4*a*c;
 
      //случай нет корней
-    if (D<0)
+    if (D < 0)
         return 0;
     double sqrtD = sqrt(D);
     //случай нулевых коэффициентов
-    if (!cmpdoubles(a, 0, EPS_COEF))
+    if (0 == cmpdoubles(a, 0, EPS_COEF))
     {
-        if (!cmpdoubles(b, 0, EPS_COEF))
+        if (0 == cmpdoubles(b, 0, EPS_COEF))
         {
-            if (!cmpdoubles(c, 0, EPS_COEF))
+            if (0 == cmpdoubles(c, 0, EPS_COEF))
                 return INF_ROOTS;
             else
                 return 0;
@@ -58,7 +58,7 @@ int solve_equation(double a, double b, double c, double *x1_adress, double *x2_a
     }
     }
     //случай 1 корень
-    if (!cmpdoubles(sqrtD/a, 0, pow(10, -ROOT_SING_COUNT)))//пренебрегаем разницей между корнями порядка 10^-ROOT_SING_COUNT, т.к. выводим с такой точностью
+    if (0 == cmpdoubles(sqrtD/a, 0, pow(10, -ROOT_SING_COUNT)))//пренебрегаем разницей между корнями порядка 10^-ROOT_SING_COUNT, т.к. выводим с такой точностью
     {
         *x1_adress = -b/(2*a);
         return 1;
@@ -96,7 +96,7 @@ void print_roots(int count, double x1, double x2)//функция которая
         break;
     default:
         printf("Я не знаю как, но вы сломали программу");
-        break;
+        abort();
     }
 }
 
@@ -104,9 +104,9 @@ void print_roots(int count, double x1, double x2)//функция которая
 //-1 = a<b; 0 = a=b; +1 = a>b
 int cmpdoubles(double a, double b, double eps)
 {
-    if (fabs(a-b)<eps)
+    if (fabs(a-b) < eps)
         return 0;
-    if (a<b)
+    if (a < b)
         return -1;
     else
         return 1;
