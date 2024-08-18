@@ -4,10 +4,10 @@
 #include <locale.h>
 
 const int INF_ROOTS = -1; //возвращаемое значение solve_equation, если корней бесконечно много
-const int ROOT_SING_COUNT = 3; //число знаков после запятой при выводе корней
+const int ROOT_SIGN_COUNT = 3; //число знаков после запятой при выводе корней
 const double EPS_COEF = 1e-7; //точность определения нулевых коэффициентов
 
-int solve_equation(double a, double b, double c, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней
+int solve_equation(double a, double b, double c, int root_sign_count, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней
 void print_menu(void);//функция которая выдает приглашение на ввод
 void print_roots(int count, double x1, double x2);//функция которая печатает корни
 int cmpdoubles(double a, double b, double eps);//функция для сравнения даблов с заданной точностью
@@ -23,7 +23,7 @@ int main()
 
     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
     {
-        count = solve_equation(a_coef, b_coef, c_coef, &x1, &x2);
+        count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &x1, &x2);
         print_roots(count, x1, x2);
         print_menu();
     }
@@ -34,7 +34,7 @@ int main()
 //функция, которая решает уравнение и возвращает количество корней
 //Переменные записываются по адресам х1 и х2
 //Если корень 1, то он записывается в х1
-int solve_equation(double a, double b, double c, double *x1_adress, double *x2_adress)
+int solve_equation(double a, double b, double c, int root_sign_count, double *x1_adress, double *x2_adress)
 {
     double D = b*b - 4*a*c;
 
@@ -59,7 +59,7 @@ int solve_equation(double a, double b, double c, double *x1_adress, double *x2_a
     }
     }
     //случай 1 корень
-    if (0 == cmpdoubles(sqrtD/a, 0, pow(10, -ROOT_SING_COUNT)))//пренебрегаем разницей между корнями порядка 10^-ROOT_SING_COUNT, т.к. выводим с такой точностью
+    if (0 == cmpdoubles(sqrtD/a, 0, pow(10, -root_sign_count)))//пренебрегаем разницей между корнями порядка 10^-root_sign_count, т.к. выводим с такой точностью
     {
         *x1_adress = -b/(2*a);
         return 1;
@@ -85,12 +85,12 @@ void print_roots(int count, double x1, double x2)//функция которая
         break;
     case 1:
         printf("Уравнение имеет один корень:\n");
-        printf("x = %.*f\n\n", ROOT_SING_COUNT, x1);
+        printf("x = %.*f\n\n", ROOT_SIGN_COUNT, x1);
         break;
     case 2:
         printf("Уравнение имеет два корня:\n");
-        printf("x1 = %.*f\n", ROOT_SING_COUNT, x1);
-        printf("x2 = %.*f\n\n", ROOT_SING_COUNT, x2);
+        printf("x1 = %.*f\n", ROOT_SIGN_COUNT, x1);
+        printf("x2 = %.*f\n\n", ROOT_SIGN_COUNT, x2);
         break;
     case INF_ROOTS:
         printf("Любое число является решением\n\n");
