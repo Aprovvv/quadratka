@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <TXLib.h>
+#include <locale.h>
 
 const int INF_ROOTS = -1; //возвращаемое значение solve_equation, если корней бесконечно много
 const int ROOT_SING_COUNT = 3; //число знаков после запятой при выводе корней
@@ -17,7 +17,8 @@ int main()
     double a_coef = 0, b_coef = 0, c_coef = 0;
     double x1 = 0, x2 = 0;
     int count = 0;
-
+    
+    setlocale(LC_ALL, "RUS");
     print_menu();
 
     while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
