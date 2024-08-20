@@ -3,6 +3,8 @@
 #include <math.h>
 #include "quad.h"
 
+static int cmpdoubles(double a, double b, double eps);//функция для сравнения даблов с заданной точностью. Объявил как статик, т.к. она нужна только в quad.cpp
+
 //функция, которая решает уравнение и возвращает количество корней
 //Переменные записываются по адресам х1 и х2
 //Если корень 1, то он записывается в х1
@@ -44,7 +46,7 @@ int solve_equation(double a, double b, double c, int root_sign_count, double *x1
 
 //функция для сравнения даблов с заданной точностью
 //-1 = a<b; 0 = a=b; +1 = a>b
-int cmpdoubles(double a, double b, double eps)
+static int cmpdoubles(double a, double b, double eps)
 {
     if (fabs(a-b) < eps)
         return 0;

@@ -3,6 +3,7 @@
 #include <math.h>
 #include <locale.h>
 #include "quad.h"
+#include <assert.h>
 
 const int ROOT_SIGN_COUNT = 3; //число знаков после запятой при выводе корней
 
@@ -55,6 +56,6 @@ void print_roots(int count, double x1, double x2)//функция которая
         break;
     default:
         printf("Я не знаю как, но вы сломали программу");
-        abort();
+        assert("Ошибка: неожиданное число корней");
     }
 }
