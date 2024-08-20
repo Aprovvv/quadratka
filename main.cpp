@@ -4,35 +4,37 @@
 #include <locale.h>
 #include "quad.h"
 #include <assert.h>
+#include <string.h>
 
 const int ROOT_SIGN_COUNT = 3; //число знаков после запятой при выводе корней
 const char* EXIT_CODE = "exit";
 
 void print_menu(void);//функция которая выдает приглашение на ввод
-void print_roots(int count, const struct roots s);//функция которая печатает корни
+void print_roots(int count, const struct roots);//функция которая печатает корни
 
 int main()
 {
     double a_coef = 0, b_coef = 0, c_coef = 0;
-    int count = 0;
-    struct roots root = {0, 0};
+    int count = 0, scan_return = 0;
+    struct roots root = {};
     
     setlocale(LC_ALL, "RUS");
     print_menu();
-
-    /*while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+   
+    while((scan_return = scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef)) != EOF)
     {
-        count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &x1, &x2);
-        print_roots(count, x1, x2);
-        print_menu();
-    }*/
-    
-    
-    while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
-    {
-        count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &root);
-        print_roots(count, root);
-        print_menu();
+        if (scan_return == 3)
+        {
+            count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &root);
+            print_roots(count, root);
+            print_menu();
+        } 
+        else 
+        {
+            printf("Введите число\n");
+            while (getchar() != '\n')
+                continue;
+        }
     }
     
 
