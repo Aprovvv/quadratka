@@ -8,7 +8,7 @@ static int cmpdoubles(double a, double b, double eps);//функция для с
 //функция, которая решает уравнение и возвращает количество корней
 //Переменные записываются по адресам х1 и х2
 //Если корень 1, то он записывается в х1
-int solve_equation(double a, double b, double c, int root_sign_count, double *x1_adress, double *x2_adress)
+int solve_equation(double a, double b, double c, int root_sign_count, struct roots *r_adr)
 {
     double D = b*b - 4*a*c;
 
@@ -28,19 +28,19 @@ int solve_equation(double a, double b, double c, int root_sign_count, double *x1
         }
     else
     {
-        *x1_adress = -c/b;
+        r_adr->x1 = -c/b;
         return 1;
     }
     }
     //случай 1 корень
     if (0 == cmpdoubles(sqrtD/a, 0, pow(10, -root_sign_count)))//пренебрегаем разницей между корнями порядка 10^-root_sign_count, т.к. выводим с такой точностью
     {
-        *x1_adress = -b/(2*a);
+        r_adr->x1 = -b/(2*a);
         return 1;
     }
     //случай 2 корня
-    *x1_adress = (-b - sqrtD)/2/a;
-    *x2_adress = (-b + sqrtD)/2/a;
+    r_adr->x1 = (-b - sqrtD)/2/a;
+    r_adr->x2 = (-b + sqrtD)/2/a;
     return 2;
 }
 

@@ -4,18 +4,16 @@
 #include <locale.h>
 #include "quad.h"
 #include <assert.h>
-#include <string.h>
 
 const int ROOT_SIGN_COUNT = 3; //число знаков после запятой при выводе корней
 const char* EXIT_CODE = "exit";
 
 void print_menu(void);//функция которая выдает приглашение на ввод
-void print_roots(int count, double x1, double x2);//функция которая печатает корни
+void print_roots(int count, const struct roots s);//функция которая печатает корни
 
 int main()
 {
     double a_coef = 0, b_coef = 0, c_coef = 0;
-    double x1 = 0, x2 = 0;
     int count = 0;
     struct roots root = {0, 0};
     
@@ -30,22 +28,11 @@ int main()
     }*/
     
     
-    while(1)
+    while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
     {
-        if (scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
-        {
-            count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &x1, &x2);
-            print_roots(count, x1, x2);
-            print_menu();
-        } else {
-            char s[5];
-            fgets(s, 5, stdin);
-            if (strcmp(s, EXIT_CODE) == 0)
-                exit(EXIT_SUCCESS);
-            printf("Ошибка: неправильный формат. Введите 3 числа или exit, чтобы завершить выполнение\n");
-            while (getchar() != '\n')
-                continue;
-        }
+        count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &root);
+        print_roots(count, root);
+        print_menu();
     }
     
 
@@ -55,10 +42,10 @@ int main()
 void print_menu(void)//функция которая выдает приглашение на ввод
 {
     printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n");
-    printf("Для завершения введите любой нечисловой символ\n");
+    printf("Для завершения введите EOF\n");
 }
 
-void print_roots(int count, double x1, double x2)//функция которая печатает корни
+void print_roots(int count, const struct roots r)//функция которая печатает корни
 {
     switch (count)
     {
@@ -67,12 +54,12 @@ void print_roots(int count, double x1, double x2)//функция которая
         break;
     case 1:
         printf("Уравнение имеет один корень:\n");
-        printf("x = %.*f\n\n", ROOT_SIGN_COUNT, x1);
+        printf("x = %.*f\n\n", ROOT_SIGN_COUNT, r.x1);
         break;
     case 2:
         printf("Уравнение имеет два корня:\n");
-        printf("x1 = %.*f\n", ROOT_SIGN_COUNT, x1);
-        printf("x2 = %.*f\n\n", ROOT_SIGN_COUNT, x2);
+        printf("x1 = %.*f\n", ROOT_SIGN_COUNT, r.x1);
+        printf("x2 = %.*f\n\n", ROOT_SIGN_COUNT, r.x2);
         break;
     case INF_ROOTS:
         printf("Любое число является решением\n\n");

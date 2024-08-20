@@ -11,9 +11,9 @@
 
 struct roots
 {
-    double r1;
-    double r2;
+    double x1;
+    double x2;
 };
 
-int solve_equation(double a, double b, double c, int root_sign_count, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней
+int solve_equation(double a, double b, double c, int root_sign_count, struct roots *r_adr);//функция, которая решает уравнение и возвращает количество корней
 #endif
