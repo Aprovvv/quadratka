@@ -9,5 +9,11 @@
 #define EPS_COEF (1e-7) //точность определения нулевых коэффициентов
 #endif
 
+struct roots
+{
+    double r1;
+    double r2;
+};
+
 int solve_equation(double a, double b, double c, int root_sign_count, double *x1, double *x2);//функция, которая решает уравнение и возвращает количество корней
 #endif

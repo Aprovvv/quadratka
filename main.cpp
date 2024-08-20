@@ -4,8 +4,10 @@
 #include <locale.h>
 #include "quad.h"
 #include <assert.h>
+#include <string.h>
 
 const int ROOT_SIGN_COUNT = 3; //число знаков после запятой при выводе корней
+const char* EXIT_CODE = "exit";
 
 void print_menu(void);//функция которая выдает приглашение на ввод
 void print_roots(int count, double x1, double x2);//функция которая печатает корни
@@ -15,16 +17,37 @@ int main()
     double a_coef = 0, b_coef = 0, c_coef = 0;
     double x1 = 0, x2 = 0;
     int count = 0;
+    struct roots root = {0, 0};
     
     setlocale(LC_ALL, "RUS");
     print_menu();
 
-    while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+    /*while(scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
     {
         count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &x1, &x2);
         print_roots(count, x1, x2);
         print_menu();
+    }*/
+    
+    
+    while(1)
+    {
+        if (scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef) == 3)
+        {
+            count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &x1, &x2);
+            print_roots(count, x1, x2);
+            print_menu();
+        } else {
+            char s[5];
+            fgets(s, 5, stdin);
+            if (strcmp(s, EXIT_CODE) == 0)
+                exit(EXIT_SUCCESS);
+            printf("Ошибка: неправильный формат. Введите 3 числа или exit, чтобы завершить выполнение\n");
+            while (getchar() != '\n')
+                continue;
+        }
     }
+    
 
     return 0;
 }
@@ -55,7 +78,6 @@ void print_roots(int count, double x1, double x2)//функция которая
         printf("Любое число является решением\n\n");
         break;
     default:
-        printf("Я не знаю как, но вы сломали программу");
-        assert("Ошибка: неожиданное число корней");
+        assert("Ошибка: неожиданное число корней" && 0);
     }
 }
