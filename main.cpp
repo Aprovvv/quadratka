@@ -10,6 +10,7 @@ const int ROOT_SIGN_COUNT = 3; //число знаков после запято
 
 void print_menu(void);//функция которая выдает приглашение на ввод
 void print_roots(const struct quad);//функция которая печатает корни
+void clean_buf(void);
 
 int main()
 {
@@ -22,6 +23,7 @@ int main()
    
     while((scan_return = scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef)) != EOF)
     {
+        clean_buf();
         if (scan_return == 3)
         {
             root = quad_solver(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
@@ -31,8 +33,7 @@ int main()
         else 
         {
             printf("Введите число\n");
-            while (getchar() != '\n')
-                continue;
+            clean_buf();
         }
     }
     return 0;
@@ -66,4 +67,10 @@ void print_roots(const struct quad r)//функция которая печат�
     default:
         assert("Ошибка: неожиданное число корней" && 0);
     }
+}
+
+void clean_buf(void)
+{
+    while (getchar() != '\n')
+        continue;
 }
