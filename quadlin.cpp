@@ -5,9 +5,12 @@
 
 static int cmpdoubles(double a, double b, double eps);//функция для сравнения даблов с заданной точностью. Объявил как статик, т.к. она нужна только в quad.cpp
 
-//функция, которая решает уравнение и возвращает количество корней
-//Переменные записываются по адресам х1 и х2
-//Если корень 1, то он записывается в х1
+/**
+Функция для решения квадратного уравнения
+
+\param[double] a, b, c {коэффициенты квадратного уравнения}
+\return структуру quad, содержащую количество корней и их значения. Если корень 1, то его значение содержится в x1. Если корней <2, то остальные корни нули.
+*/
 struct quad quad_solver(double a, double b, double c, int root_sign_count)
 {
     double D = b*b - 4*a*c;
@@ -50,6 +53,11 @@ struct quad quad_solver(double a, double b, double c, int root_sign_count)
     return answer;
 }
 
+/**
+Функция для решения линейного уравнения.
+\param[double] k, b
+\return структуру lin, содержащую количество корней и значения. Если корней бесконечно или 0, корень нулевой.
+*/
 struct lin lin_solver(double k, double b)
 {
     struct lin answer = {};
@@ -74,8 +82,11 @@ struct lin lin_solver(double k, double b)
     }
 }
 
-//функция для сравнения даблов с заданной точностью
-//-1 = a<b; 0 = a=b; +1 = a>b
+/**функция для сравнения даблов с заданной точностью
+\param[double] a, b {сравниваемые чиса}
+\param[double] eps {точность сравнения}
+\return -1 если a<b; 0 если a=b; +1 если a>b
+*/
 static int cmpdoubles(double a, double b, double eps)
 {
     if (fabs(a-b) < eps)
