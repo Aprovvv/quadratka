@@ -6,7 +6,8 @@
 
 const int ROOT_SIGN_COUNT = 3;
 
-int quad_equal (struct quad a, struct quad b, double eps);
+static int quad_equal (struct quad a, struct quad b, double eps);
+static void print_test_error(struct quad file_answer, struct quad func_answer, int line);
 
 int main()
 {
@@ -16,7 +17,7 @@ int main()
         printf("Не удается открыть файл\n");
         exit(EXIT_FAILURE);
     }
-    //rewind(fp);
+    
     int line = 0;
     double a_coef=0, b_coef=0, c_coef=0;
     struct quad file_answer = {};
@@ -28,15 +29,23 @@ int main()
         func_answer = quad_solve(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
         if (quad_equal(file_answer, func_answer, pow(10, -ROOT_SIGN_COUNT)) == 0)
         {
-            printf("Ошибка в тесте %i\n", line); 
+           /* printf("Ошибка в тесте %i\n", line); 
             printf("Ожидаемые значения: %i %.*f %.*f\n", file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
-            printf("Полученные значения: %i %.*f %.*f\n\n", func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);
+            printf("Полученные значения: %i %.*f %.*f\n\n", func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);*/
+            print_test_error(file_answer, func_answer, line);
         }
     }
     printf("Все тесты пройдены.\n");
 }
 
-int quad_equal (struct quad a, struct quad b, double eps)
+static int quad_equal (struct quad a, struct quad b, double eps)
 {
     return ((a.count == b.count) && (cmpdoubles(a.x1, b.x1, eps) == 0) && (cmpdoubles(a.x2, b.x2, eps) == 0));
+}
+
+static void print_test_error(struct quad file_answer, struct quad func_answer, int line)
+{
+    printf("Ошибка в тесте %i\n", line); 
+    printf("Ожидаемые значения: %i %.*f %.*f\n", file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
+    printf("Полученные значения: %i %.*f %.*f\n\n", func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);
 }
