@@ -2,21 +2,20 @@
 #include <stdlib.h>
 #include <math.h>
 #include <locale.h>
-#include "quad.h"
+#include "quadlin.h"
 #include <assert.h>
 #include <string.h>
 
 const int ROOT_SIGN_COUNT = 3; //число знаков после запятой при выводе корней
-const char* EXIT_CODE = "exit";
 
 void print_menu(void);//функция которая выдает приглашение на ввод
-void print_roots(int count, const struct roots);//функция которая печатает корни
+void print_roots(const struct quad);//функция которая печатает корни
 
 int main()
 {
     double a_coef = 0, b_coef = 0, c_coef = 0;
-    int count = 0, scan_return = 0;
-    struct roots root = {};
+    int scan_return = 0;
+    struct quad root = {};
     
     setlocale(LC_ALL, "RUS");
     print_menu();
@@ -25,8 +24,8 @@ int main()
     {
         if (scan_return == 3)
         {
-            count = solve_equation(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT, &root);
-            print_roots(count, root);
+            root = quad_solver(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
+            print_roots(root);
             print_menu();
         } 
         else 
@@ -36,8 +35,6 @@ int main()
                 continue;
         }
     }
-    
-
     return 0;
 }
 
@@ -47,9 +44,9 @@ void print_menu(void)//функция которая выдает приглаш
     printf("Для завершения введите EOF\n");
 }
 
-void print_roots(int count, const struct roots r)//функция которая печатает корни
+void print_roots(const struct quad r)//функция которая печатает корни
 {
-    switch (count)
+    switch (r.count)
     {
     case 0:
         printf("Нет корней\n\n");

@@ -9,12 +9,18 @@
 #define EPS_COEF (1e-7) //точность определения нулевых коэффициентов
 #endif
 
-struct roots
+struct quad
 {
-    int root_count;
+    int count;
     double x1;
     double x2;
 };
+struct lin
+{
+    int count;
+    double x;
+};
 
-int solve_equation(double a, double b, double c, int root_sign_count, struct roots *r_adr);//функция, которая решает уравнение и возвращает количество корней
+struct quad quad_solver(double a, double b, double c, int root_sign_count);//функция, которая решает уравнение и возвращает количество корней
+struct lin lin_solver(double k, double b);
 #endif
