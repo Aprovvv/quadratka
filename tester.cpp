@@ -11,7 +11,7 @@ static void print_test_error(struct quad file_answer, struct quad func_answer, i
 
 int main()
 {
-    FILE* fp = fopen("testdata.txt", "r"); 
+    FILE* fp = fopen("testdata.csv", "r"); 
     if (fp == NULL)
     {
         printf("Не удается открыть файл\n");
@@ -23,17 +23,12 @@ int main()
     struct quad file_answer = {};
     struct quad func_answer = {};
     
-    while (fscanf(fp, "%lf %lf %lf %i %lf %lf", &a_coef, &b_coef, &c_coef, &file_answer.count, &file_answer.x1, &file_answer.x2) != EOF)
+    while (fscanf(fp, "%lf,%lf,%lf,%i,%lf,%lf", &a_coef, &b_coef, &c_coef, &file_answer.count, &file_answer.x1, &file_answer.x2) != EOF)
     {
         line++;
         func_answer = quad_solve(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
         if (quad_equal(file_answer, func_answer, pow(10, -ROOT_SIGN_COUNT)) == 0)
-        {
-           /* printf("Ошибка в тесте %i\n", line); 
-            printf("Ожидаемые значения: %i %.*f %.*f\n", file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
-            printf("Полученные значения: %i %.*f %.*f\n\n", func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);*/
             print_test_error(file_answer, func_answer, line);
-        }
     }
     printf("Все тесты пройдены.\n");
 }
