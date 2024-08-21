@@ -21,6 +21,13 @@ struct lin
     double x;
 };
 
-struct quad quad_solver(double a, double b, double c, int root_sign_count);//функция, которая решает уравнение и возвращает количество корней
-struct lin lin_solver(double k, double b);
+/**
+ *Функция для решения квадратного уравнения
+ *
+ * \param a, b, c {коэффициенты квадратного уравнения}
+ * \return структуру quad, содержащую количество корней и их значения. Если корень 1, то его значение содержится в x1. Если корней <2, то остальные корни нули.
+*/
+struct quad quad_solve(double a, double b, double c, int root_sign_count);//функция, которая решает уравнение и возвращает количество корней
+struct lin lin_solve(double k, double b);
+int cmpdoubles(double a, double b, double eps);//функция для сравнения даблов с заданной точностью
 #endif

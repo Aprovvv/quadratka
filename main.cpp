@@ -26,7 +26,7 @@ int main()
         clean_buf();
         if (scan_return == 3)
         {
-            root = quad_solver(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
+            root = quad_solve(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
             print_roots(root);
             print_menu();
         } 
