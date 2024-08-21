@@ -3,15 +3,17 @@
 #include <math.h>
 #include <string.h>
 #include "quadlin.h"
+#include "filetester.h"
 
 const int ROOT_SIGN_COUNT = 3;
 
 static int quad_equal (struct quad a, struct quad b, double eps);
 static void print_test_error(struct quad file_answer, struct quad func_answer, int line);
 
-int main()
+void filetester(char* filename)
 {
-    FILE* fp = fopen("testdata.csv", "r"); 
+    printf("%s", filename);
+    FILE* fp = fopen(filename, "r"); 
     if (fp == NULL)
     {
         printf("Не удается открыть файл\n");
@@ -30,7 +32,7 @@ int main()
         if (quad_equal(file_answer, func_answer, pow(10, -ROOT_SIGN_COUNT)) == 0)
             print_test_error(file_answer, func_answer, line);
     }
-    printf("Все тесты пройдены.\n");
+    printf("Все тесты пройдены.\n\n");
 }
 
 static int quad_equal (struct quad a, struct quad b, double eps)

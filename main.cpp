@@ -3,6 +3,7 @@
 #include <math.h>
 #include <locale.h>
 #include "quadlin.h"
+#include "filetester.h"
 #include <assert.h>
 #include <string.h>
 
@@ -11,9 +12,13 @@ const int ROOT_SIGN_COUNT = 3; //число знаков после запято
 void print_menu(void);//функция которая выдает приглашение на ввод
 void print_roots(const struct quad);//функция которая печатает корни
 void clean_buf(void);
+void analyse_flags(int argc, char* argv[]);
+void print_help(void);
 
-int main()
+int main(int argc, char** argv)
 {
+    if (argc > 1)
+        analyse_flags(argc, argv);
     double a_coef = 0, b_coef = 0, c_coef = 0;
     int scan_return = 0;
     struct quad root = {};
@@ -73,4 +78,29 @@ void clean_buf(void)
 {
     while (getchar() != '\n')
         continue;
+}
+
+void analyse_flags(int argc, char* argv[])
+{
+    for (int i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-h") == 0)
+            print_help();
+        if (strcmp(argv[i], "-f") == 0)
+        {
+            char filename[50];
+            printf("Введите имя файла с данными для тестирования:\n");
+            fgets(filename, 50, stdin);
+            filetester(filename);
+        }
+    }
+}
+
+void print_help(void)
+{
+    printf("Добро пожаловать в квадратку!\n");
+    printf("Введите ./a.out для запуска программы.\n");
+    printf("Также доступны следующие флаги:\n");
+    printf("-h: помощь;\n");
+    printf("-f: тестирование по данным из файла (нужен файл с именем testdata.csv для работы).\n\n");
 }
