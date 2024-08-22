@@ -20,6 +20,7 @@ void sget (char* str, int size);//функция для чтения строк�
 
 int main(int argc, char** argv)
 {
+    //puts(s);
     for (int i = 1; i < argc; i++)
     {
         int n = analyse_flags(argv[i], flags, (int)strlen(flags));
@@ -39,7 +40,6 @@ int main(int argc, char** argv)
     int scan_return = 0;
     struct quad root = {};
 
-    setlocale(LC_ALL, "RUS");
     print_menu();
 
     while((scan_return = scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef)) != EOF)

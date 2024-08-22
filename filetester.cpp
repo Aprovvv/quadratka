@@ -4,6 +4,12 @@
 #include <string.h>
 #include "quadlin.h"
 #include "filetester.h"
+#include <errno.h>
+#include <locale.h>
+
+#define GREEN "\033[92m"
+#define RED "\033[91m"
+#define STANDART "\033[39m"
 
 const int ROOT_SIGN_COUNT = 3;
 
@@ -12,12 +18,17 @@ static void print_test_error(struct quad file_answer, struct quad func_answer, i
 
 void filetester(char* filename)
 {
+    //setlocale(LC_ALL, "RUS");
+    //setlocale(LC_ALL, "RUS");
+    //printf("%s\n", s);
+    setlocale(LC_ALL, "ru_RU.utf8");
     FILE* fp = fopen(filename, "r");
-    if (fp == NULL)
+    if (errno != 0)
     {
-        printf("Не удается открыть файл\n");
+        printf("Не удалось открыть файл: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
+    setlocale(LC_ALL, "C");
 
     int line = 0;
     int all_correct = 1;
@@ -36,7 +47,7 @@ void filetester(char* filename)
         }
     }
     if (all_correct)
-        printf("\033[92mВсе тесты успешно пройдены!\n\n\033[39m");
+        printf(GREEN"Все тесты успешно пройдены!\n\n"STANDART);
 }
 
 //1, если структуры а и b равны, 0 если нет
@@ -48,7 +59,7 @@ static int quad_equal (struct quad a, struct quad b, double eps)
 //печатает инфу о неверно пройденном тесте
 static void print_test_error(struct quad file_answer, struct quad func_answer, int line)
 {
-    printf("\033[91mОшибка в тесте %i\n\033[39m", line);
-    printf("\033[91mОжидаемые значения: %i %.*f %.*f\n\033[39m", file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
-    printf("\033[91mПолученные значения: %i %.*f %.*f\n\n\033[39m", func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);
+    printf(RED"Ошибка в тесте %i\n", line);
+    printf("Ожидаемые значения: %i %.*f %.*f\n", file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
+    printf("Полученные значения: %i %.*f %.*f\n\n"STANDART, func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);
 }
