@@ -7,8 +7,8 @@
 
 const int ROOT_SIGN_COUNT = 3;
 
-static int quad_equal (struct quad a, struct quad b, double eps);
-static void print_test_error(struct quad file_answer, struct quad func_answer, int line);
+static int quad_equal (struct quad a, struct quad b, double eps);//1, если структуры а и b равны, 0 если нет
+static void print_test_error(struct quad file_answer, struct quad func_answer, int line);//печатает инфу о неверно пройденном тесте
 
 void filetester(char* filename)
 {
@@ -34,11 +34,13 @@ void filetester(char* filename)
     printf("Все тесты пройдены.\n\n");
 }
 
+//1, если структуры а и b равны, 0 если нет
 static int quad_equal (struct quad a, struct quad b, double eps)
 {
     return ((a.count == b.count) && (cmpdoubles(a.x1, b.x1, eps) == 0) && (cmpdoubles(a.x2, b.x2, eps) == 0));
 }
 
+//печатает инфу о неверно пройденном тесте
 static void print_test_error(struct quad file_answer, struct quad func_answer, int line)
 {
     printf("Ошибка в тесте %i\n", line); 
