@@ -10,13 +10,12 @@
 #define GREEN "\033[92m"
 #define RED "\033[91m"
 #define STANDART "\033[39m"
-
 const int ROOT_SIGN_COUNT = 3;
 
 static int quad_equal (struct quad a, struct quad b, double eps);//1, если структуры а и b равны, 0 если нет
 static void print_test_error(struct quad file_answer, struct quad func_answer, int line);//печатает инфу о неверно пройденном тесте
 
-void filetester(char* filename)
+void filetester(const char* filename)
 {
     //setlocale(LC_ALL, "RUS");
     //setlocale(LC_ALL, "RUS");
@@ -35,10 +34,15 @@ void filetester(char* filename)
     double a_coef=0, b_coef=0, c_coef=0;
     struct quad file_answer = {};
     struct quad func_answer = {};
-
-    while (fscanf(fp, "%lf,%lf,%lf,%i,%lf,%lf", &a_coef, &b_coef, &c_coef, &file_answer.count, &file_answer.x1, &file_answer.x2) != EOF)
+    int scan_count;
+    while ((scan_count = fscanf(fp, "%lf,%lf,%lf,%i,%lf,%lf", &a_coef, &b_coef, &c_coef, &file_answer.count, &file_answer.x1, &file_answer.x2)) != EOF)
     {
         line++;
+        if (scan_count != 6)
+        {
+            printf("Ошибка чтения из файла в строке %d\n", line);
+            exit(EXIT_FAILURE);
+        }
         func_answer = quad_solve(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
         if (quad_equal(file_answer, func_answer, pow(10, -ROOT_SIGN_COUNT)) == 0)
         {

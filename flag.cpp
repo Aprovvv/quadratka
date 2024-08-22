@@ -4,7 +4,7 @@
 #include "flag.h"
 //функция, которая анализирует аргументы командной строки
 //в ней считается, что аргумент - это строка из двух символов, первый из которых - '-'
-int analyse_flags(const char* flag, const char* all_flags, int size)
+int analyse_flag(const char* flag, const char* all_flags, int size)
 {
     for(int i = 0; i < size; i++)
     {

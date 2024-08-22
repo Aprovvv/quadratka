@@ -7,6 +7,7 @@
 #include "flag.h"
 #include <assert.h>
 #include <string.h>
+#include <limits.h>
 
 const char* flags = "hf";
 const int ROOT_SIGN_COUNT = 3; //число знаков после запятой при выводе корней
@@ -23,7 +24,7 @@ int main(int argc, char** argv)
     //puts(s);
     for (int i = 1; i < argc; i++)
     {
-        int n = analyse_flags(argv[i], flags, (int)strlen(flags));
+        int n = analyse_flag(argv[i], flags, (int)strlen(flags));
         switch (n)
         {
         case 'h':
@@ -103,9 +104,9 @@ void clean_buf(void)
 //вызывает тестирование из файла (флаг -f)
 void start_filetest(void)
 {
-    char filename[100];
+    char filename[PATH_MAX] = "";
     printf("Введите имя файла с данными для тестирования:\n");
-    sget(filename, 100);
+    sget(filename, PATH_MAX);
     filetester(filename);
 }
 
