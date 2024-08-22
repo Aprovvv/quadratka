@@ -12,7 +12,6 @@ static void print_test_error(struct quad file_answer, struct quad func_answer, i
 
 void filetester(char* filename)
 {
-    printf("%s", filename);
     FILE* fp = fopen(filename, "r"); 
     if (fp == NULL)
     {

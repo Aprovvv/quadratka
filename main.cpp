@@ -14,6 +14,7 @@ void print_roots(const struct quad);//функция которая печата
 void clean_buf(void);
 void analyse_flags(int argc, char* argv[]);
 void print_help(void);
+void sget (char* str, int size);
 
 int main(int argc, char** argv)
 {
@@ -88,9 +89,9 @@ void analyse_flags(int argc, char* argv[])
             print_help();
         if (strcmp(argv[i], "-f") == 0)
         {
-            char filename[50];
+            char filename[100];
             printf("Введите имя файла с данными для тестирования:\n");
-            fgets(filename, 50, stdin);
+            sget(filename, 100);
             filetester(filename);
         }
     }
@@ -103,4 +104,16 @@ void print_help(void)
     printf("Также доступны следующие флаги:\n");
     printf("-h: помощь;\n");
     printf("-f: тестирование по данным из файла (нужен файл с именем testdata.csv для работы).\n\n");
+}
+
+void sget (char* str, int size)
+{
+    char ch = 'a';
+    int count = 0;
+    while ((ch = getchar()) != '\n' && count!= size-2)
+    {
+        str[count] = ch;
+        count++;
+    }
+    str[count] = '\0';
 }
