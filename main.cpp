@@ -4,30 +4,44 @@
 #include <locale.h>
 #include "quadlin.h"
 #include "filetester.h"
+#include "flag.h"
 #include <assert.h>
 #include <string.h>
 
+const char* flags = "hf";
 const int ROOT_SIGN_COUNT = 3; //число знаков после запятой при выводе корней
 
 void print_menu(void);//функция которая выдает приглашение на ввод
 void print_roots(const struct quad);//функция которая печатает корни
 void clean_buf(void);//функция для очистки буфера
-void analyse_flags(int argc, char* argv[]);//функция, которая анализирует аргументы командной строки
 void print_help(void);//выводит справку флага -h
 void start_filetest(void);//вызывает тестирование из файла (флаг -f)
 void sget (char* str, int size);//функция для чтения строки без \n на конце
 
 int main(int argc, char** argv)
 {
-    if (argc > 1)
-        analyse_flags(argc, argv);
+    for (int i = 1; i < argc; i++)
+    {
+        int n = analyse_flags(argv[i], flags, (int)strlen(flags));
+        switch (n)
+        {
+        case 'h':
+            print_help();
+            break;
+        case 'f':
+            start_filetest();
+            break;
+        default:
+            printf("Ошибка: неопознанный флаг\n");
+        }
+    }
     double a_coef = 0, b_coef = 0, c_coef = 0;
     int scan_return = 0;
     struct quad root = {};
-    
+
     setlocale(LC_ALL, "RUS");
     print_menu();
-   
+
     while((scan_return = scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef)) != EOF)
     {
         clean_buf();
@@ -36,8 +50,8 @@ int main(int argc, char** argv)
             root = quad_solve(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
             print_roots(root);
             print_menu();
-        } 
-        else 
+        }
+        else
         {
             printf("Введите число\n");
             clean_buf();
@@ -81,20 +95,9 @@ void print_roots(const struct quad r)//функция которая печат�
 //функция для очистки буфера
 void clean_buf(void)
 {
-    while (getchar() != '\n')
+    int ch = 0;
+    while ((ch = getchar()) != EOF && ch != '\n')
         continue;
-}
-
-//функция, которая анализирует аргументы командной строки
-void analyse_flags(int argc, char* argv[])
-{
-    for (int i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-h") == 0)
-            print_help();
-        if (strcmp(argv[i], "-f") == 0)
-            start_filetest();
-    }
 }
 
 //вызывает тестирование из файла (флаг -f)
@@ -122,9 +125,6 @@ void sget (char* str, int size)
     int ch = 'a';
     int count = 0;
     while ((ch = getchar()) != '\n' && count!= size-2)
-    {
-        str[count] = (char)ch;
-        count++;
-    }
+        str[count++] = (char)ch;
     str[count] = '\0';
 }
