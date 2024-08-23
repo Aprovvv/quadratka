@@ -18,8 +18,8 @@ static void print_menu(void);                  //функция которая �
 static void print_roots(const struct quad);    //функция которая печатает корни
 static void clean_buf(void);                   //функция для очистки буфера
 static void print_help(void);                  //выводит справку флага -h
-static void start_filetest(void);              //вызывает тестирование из файла (флаг -f)
-static int sget (char* str, int sizasserte);   //функция для чтения строки без \n на конце
+static int start_filetest(void);               //вызывает тестирование из файла (флаг -f)
+static int sget(char* str, int sizasserte);    //функция для чтения строки без \n на конце
 
 int lang_flag = 0;//[lang_flag]
 
@@ -35,7 +35,8 @@ int main(int argc, char** argv)
             print_help();
             break;
         case 'f':
-            start_filetest();
+            if(start_filetest())
+                exit(EXIT_SUCCESS);
             break;
         case 'e':
             lang_flag = 1;
@@ -118,19 +119,19 @@ static void clean_buf(void)
 /**
  * Функция для вызова тестирования из файла (флаг -f).
  */
-static void start_filetest(void)
+static int start_filetest(void)
 {
     char filename[PATH_MAX] = "";
-    printf("%s", phrases[lang_flag].pr_filename);
-    sget(filename, PATH_MAX);
-    //printf("%d %d", filetester(filename) != 0, strcmp(filename,"#") != 0);
-    while(filetester(filename) && strcmp(filename,"#") != 0)
+    do
     {
         strcpy(filename, "");
         printf("%s", phrases[lang_flag].pr_filename);
-        if (sget(filename, PATH_MAX))
-            return;
-    }
+        if(sget(filename, PATH_MAX))
+            return 1;
+        if(strcmp(filename,"#") == 0)
+            return 0;
+    } while(filetester(filename) != 0);
+    return 0;
 }
 
 /**
@@ -150,7 +151,7 @@ static int sget (char* str, int size)
 {
     int ch = 'a';
     int count = 0;
-    while ((ch = getchar()) != '\n' && count!= size-2)
+    while ((ch = getchar()) != '\n' && count != size-2)
     {
         if (ch == EOF)
             return 1;

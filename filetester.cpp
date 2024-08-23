@@ -20,7 +20,7 @@ static void print_test_error(struct quad file_answer, struct quad func_answer, i
 
 int filetester(const char* filename)
 {
-    setlocale(LC_ALL, "ru_RU.utf8");
+    setlocale(LC_ALL, phrases[lang_flag].locale_name);
     FILE* fp = fopen(filename, "r");
     if (errno != 0)
     {

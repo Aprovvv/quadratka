@@ -16,6 +16,7 @@ struct print_data{
     const char *pr_test_err;
     const char *pr_exp;
     const char *pr_res;
+    const char *locale_name;
 };
 static const struct print_data phrases[2] =
 {
@@ -28,7 +29,8 @@ static const struct print_data phrases[2] =
         .pr_one_root = "Уравнение имеет один корень:\n",
         .pr_two_roots = "Уравнение имеет два корня:\n",
         .pr_inf_roots = "Любое число является решением\n\n",
-        .pr_filename = "Введите имя файла с данными для тестирования или EOF для отмены:\n",
+        .pr_filename = "Введите имя файла с данными для тестирования,"
+                       "EOF для выхода из программы или # для перехода к квадратке:\n",
         .pr_help = "Добро пожаловать в квадратку!\n"
                    "Введите ./a.out для запуска программы.\n"
                    "Также доступны следующие флаги:\n"
@@ -40,7 +42,8 @@ static const struct print_data phrases[2] =
         .pr_test_pass = "Все тесты успешно пройдены!\n\n",
         .pr_test_err = "Ошибка в тесте",
         .pr_exp = "Ожидаемые значения:",
-        .pr_res = "Полученные значения:"
+        .pr_res = "Полученные значения:",
+        .locale_name = "ru_RU.utf8"
     },
     {
         .pr_fl_err = "Error: unidentifined flag",
@@ -51,7 +54,7 @@ static const struct print_data phrases[2] =
         .pr_one_root = "The equation has one root:\n",
         .pr_two_roots = "The equation has two roots:\n",
         .pr_inf_roots = "Any number is a root\n\n",
-        .pr_filename = "Enter name of the file for testing or EOF to cancel\n",
+        .pr_filename = "Enter name of the file for testing, EOF to quit or # to go to quadratka\n",
         .pr_help = "Welcome to quadratic equation solver (aka quadratka)!\n"
                    "Enter ./a.out to start the program.\n"
                    "There are also available some flags:\n"
@@ -63,7 +66,8 @@ static const struct print_data phrases[2] =
         .pr_test_pass = "All tests were succesfully passed!\n\n",
         .pr_test_err = "Error in test",
         .pr_exp = "Expected:",
-        .pr_res = "Get:"
+        .pr_res = "Get:",
+        .locale_name = "C"
     }
 };
 /*struct test
