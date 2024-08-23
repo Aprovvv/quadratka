@@ -7,6 +7,9 @@
 #include "filetester.h"
 #include <errno.h>
 #include <locale.h>
+#include "language.h"
+
+extern int lang_flag;
 
 #define PRINT_COLOR(c, x) printf(c x STANDART)
 
@@ -21,7 +24,7 @@ int filetester(const char* filename)
     FILE* fp = fopen(filename, "r");
     if (errno != 0)
     {
-        printf(RED"Не удалось открыть файл: %s\n"STANDART, strerror(errno));
+        printf(RED"%s %s\n"STANDART, phrases[lang_flag].pr_file_nopen, strerror(errno));
         errno = 0;
         return 1;
     }
@@ -38,7 +41,7 @@ int filetester(const char* filename)
         line++;
         if (scan_count != 6)
         {
-            fprintf(stderr, RED"Ошибка чтения из файла в строке %d\n"STANDART, line);
+            fprintf(stderr, RED"%s %d\n"STANDART, phrases[lang_flag].pr_read_err, line);
         }
         func_answer = quad_solve(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
         if (quad_equal(file_answer, func_answer, pow(10, -ROOT_SIGN_COUNT)) == 0)
@@ -48,8 +51,8 @@ int filetester(const char* filename)
         }
     }
     if (all_correct)
-        //printf(GREEN"Все тесты успешно пройдены!\n\n"STANDART);
-        PRINT_COLOR(GREEN, "Все тесты успешно пройдены!\n\n");
+        printf(GREEN"%s"STANDART, phrases[lang_flag].pr_test_pass);
+        //PRINT_COLOR(GREEN, "Все тесты успешно пройдены!\n\n");
     fclose(fp);
     return 0;//
 }
@@ -74,7 +77,7 @@ static int quad_equal (struct quad a, struct quad b, double eps)
 static void print_test_error(struct quad file_answer, struct quad func_answer, int line)
 {
 
-    printf(RED"Ошибка в тесте %i\n", line);
-    printf("Ожидаемые значения: %i %.*f %.*f\n", file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
-    printf("Полученные значения: %i %.*f %.*f\n\n"STANDART, func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);
+    printf(RED"%s %i\n", phrases[lang_flag].pr_test_err, line);
+    printf("%s %i %.*f %.*f\n", phrases[lang_flag].pr_exp, file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
+    printf("%s %i %.*f %.*f\n\n"STANDART, phrases[lang_flag].pr_res, func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);
 }

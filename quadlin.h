@@ -2,7 +2,7 @@
 #ifndef QUAD_H
 #define QUAD_H
 
-const double EPS_COEF = 1e-7;
+static const double EPS_COEF = 1e-7;
 
 enum root_count {INF_ROOTS = -1, ZERO_ROOTS, ONE_ROOT, TWO_ROOTS};
 
