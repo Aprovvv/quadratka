@@ -10,15 +10,20 @@
 #include "filetester.h"
 #include "flag.h"
 
+struct print_data{
+    char FL_ERR;
+    char PR_NUMB;
+};
+
 const char* flags = "hf";
 const int ROOT_SIGN_COUNT = 3;          //число знаков после запятой при выводе корней
 
-void print_menu(void);                  //функция которая выдает приглашение на ввод
-void print_roots(const struct quad);    //функция которая печатает корни
-void clean_buf(void);                   //функция для очистки буфера
-void print_help(void);                  //выводит справку флага -h
-void start_filetest(void);              //вызывает тестирование из файла (флаг -f)
-int sget (char* str, int sizasserte);   //функция для чтения строки без \n на конце
+static void print_menu(void);                  //функция которая выдает приглашение на ввод
+static void print_roots(const struct quad);    //функция которая печатает корни
+static void clean_buf(void);                   //функция для очистки буфера
+static void print_help(void);                  //выводит справку флага -h
+static void start_filetest(void);              //вызывает тестирование из файла (флаг -f)
+static int sget (char* str, int sizasserte);   //функция для чтения строки без \n на конце
 
 int main(int argc, char** argv)
 {
@@ -66,7 +71,7 @@ int main(int argc, char** argv)
 /**
  * Функция которая выдает приглашение на ввод.
  */
-void print_menu(void)
+static void print_menu(void)
 {
     printf("Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n"
     "Для завершения введите EOF\n");
@@ -76,7 +81,7 @@ void print_menu(void)
  * Функция, которая печатает корни.
  * \param r {Структура quad, содеражащая корни.}
  */
-void print_roots(const struct quad r)
+static void print_roots(const struct quad r)
 {
     switch (r.count)
     {
@@ -103,7 +108,7 @@ void print_roots(const struct quad r)
 /**
  * Функция для очистки буфера.
  */
-void clean_buf(void)
+static void clean_buf(void)
 {
     int ch = 0;
     while ((ch = getchar()) != EOF && ch != '\n')
@@ -113,10 +118,10 @@ void clean_buf(void)
 /**
  * Функция для вызова тестирования из файла (флаг -f).
  */
-void start_filetest(void)
+static void start_filetest(void)
 {
     char filename[PATH_MAX] = "";
-    printf("Введите имя файла с данными для тестирования или # для отмены:\n");
+    printf("Введите имя файла с данными для тестирования или EOF для отмены:\n");
     sget(filename, PATH_MAX);
     //printf("%d %d", filetester(filename) != 0, strcmp(filename,"#") != 0);
     while(filetester(filename) && strcmp(filename,"#") != 0)
@@ -131,7 +136,7 @@ void start_filetest(void)
 /**
  * Функция, которая выводит справку (флаг -h)
  */
-void print_help(void)
+static void print_help(void)
 {
     printf("Добро пожаловать в квадратку!\n"
     "Введите ./a.out для запуска программы.\n"
@@ -145,7 +150,7 @@ void print_help(void)
  * \param str {Адрес строки, в которую записываем считанные данные.}
  * \param size {Длина строки str.}
  */
-int sget (char* str, int size)
+static int sget (char* str, int size)
 {
     int ch = 'a';
     int count = 0;

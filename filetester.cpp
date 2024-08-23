@@ -15,10 +15,6 @@ const int ROOT_SIGN_COUNT = 3;
 static int quad_equal(struct quad a, struct quad b, double eps);//1, если структуры а и b равны, 0 если нет
 static void print_test_error(struct quad file_answer, struct quad func_answer, int line);//печатает инфу о неверно пройденном тесте
 
-/**
- * Функция, которая открывает файл (.csv), считывает оттуда данные и тестирует функцию quad_solve
- * \param filename {Имя файла для открытия.}
- */
 int filetester(const char* filename)
 {
     setlocale(LC_ALL, "ru_RU.utf8");

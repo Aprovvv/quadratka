@@ -5,16 +5,6 @@
 #include "quadlin.h"
 #include <assert.h>
 
-
-/**
- *Функция для решения квадратного уравнения
- *
- * \param a, b, c {коэффициенты квадратного уравнения}
- * \param root_sig_count {точность корней (знаки после запятой)}
- * \return структуру quad, содержащую количество корней и их значения.
- * Если корень 1, то его значение содержится в x1. Если корней <2, то остальные корни нули.
- * Корни упорядочены по возрастанию
-*/
 struct quad quad_solve(double a, double b, double c, int root_sign_count)
 {
     assert(isfinite(a));
@@ -98,11 +88,6 @@ struct lin lin_solve(double k, double b)
     }
 }
 
-/**функция для сравнения даблов с заданной точностью
-\param a, b {сравниваемые чиса}
-\param eps {точность сравнения}
-\return -1 если a<b; 0 если a=b; +1 если a>b
-*/
 int cmpdoubles(double a, double b, double eps)
 {
     if (fabs(a-b) < eps)
