@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <string.h>
 #include <limits.h>
+#include <unistd.h>
 #include "quadlin.h"
 #include "filetester.h"
 #include "flag.h"
@@ -20,32 +21,14 @@ static void clean_buf(void);                   //функция для очис�
 static void print_help(void);                  //выводит справку флага -h
 static int start_filetest(void);               //вызывает тестирование из файла (флаг -f)
 static int sget(char* str, int sizasserte);    //функция для чтения строки без \n на конце
+static void arg_analyze(int argc, char** argv);
 
 int lang_flag = 0;//[lang_flag]
 
 int main(int argc, char** argv)
 {
     //puts(s);
-    for (int i = 1; i < argc; i++)
-    {
-        int n = analyse_flag(argv[i], flags, strlen(flags));
-        switch (n)
-        {
-        case 'h':
-            print_help();
-            break;
-        case 'f':
-            if(start_filetest())
-                exit(EXIT_SUCCESS);
-            break;
-        case 'e':
-            lang_flag = 1;
-            break;
-        default:
-            printf(RED"%s \"%c\"\n"STANDART, phrases[lang_flag].pr_fl_err, n);
-            print_help();
-        }
-    }
+    arg_analyze(argc, argv);
     double a_coef = 0, b_coef = 0, c_coef = 0;
     int scan_return = 0;
     struct quad root = {};
@@ -159,4 +142,35 @@ static int sget (char* str, int size)
     }
     str[count] = '\0';
     return 0;
+}
+
+static void arg_analyze(int argc, char** argv)
+{
+    for (int i = 1; i < argc; i++)
+    {
+        int n = analyse_flag(argv[i], flags, strlen(flags));
+        switch (n)
+        {
+        case 'h':
+            print_help();
+            break;
+        case 'f':
+            if(start_filetest())
+                exit(EXIT_SUCCESS);
+            break;
+        case 'e':
+            lang_flag = 1;
+            break;
+        default:
+            if (isatty(2))
+            {
+                fprintf(stderr, RED "%s \"%c\"\n" STANDART, phrases[lang_flag].pr_fl_err, n);
+            }
+            else
+            {
+                fprintf(stderr, "%s \"%c\"\n", phrases[lang_flag].pr_fl_err, n);
+            }
+            print_help();
+        }
+    }
 }
