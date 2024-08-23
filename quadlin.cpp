@@ -1,16 +1,26 @@
+/**@file */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "quadlin.h"
+#include <assert.h>
+
 
 /**
  *Функция для решения квадратного уравнения
  *
  * \param a, b, c {коэффициенты квадратного уравнения}
- * \return структуру quad, содержащую количество корней и их значения. Если корень 1, то его значение содержится в x1. Если корней <2, то остальные корни нули.
+ * \param root_sig_count {точность корней (знаки после запятой)}
+ * \return структуру quad, содержащую количество корней и их значения.
+ * Если корень 1, то его значение содержится в x1. Если корней <2, то остальные корни нули.
+ * Корни упорядочены по возрастанию
 */
 struct quad quad_solve(double a, double b, double c, int root_sign_count)
 {
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(c));
+
     double D = b*b - 4*a*c;
     struct quad answer = {};
 
@@ -22,7 +32,7 @@ struct quad quad_solve(double a, double b, double c, int root_sign_count)
     }
     double sqrtD = sqrt(D);
     //случай нулевых коэффициентов
-    if (0 == cmpdoubles(a, 0, EPS_COEF))
+    if (cmpdoubles(a, 0, EPS_COEF) == 0)
     {
         struct lin lin_ans = lin_solve(b, c);
         if (lin_ans.count == 1)
@@ -45,15 +55,23 @@ struct quad quad_solve(double a, double b, double c, int root_sign_count)
         return answer;
     }
     //случай 2 корня
-    answer.x1 = (-b - sqrtD)/2/a;
-    answer.x2 = (-b + sqrtD)/2/a;
+    if (a > 0)
+    {
+        answer.x1 = (-b - sqrtD)/2/a;
+        answer.x2 = (-b + sqrtD)/2/a;
+    }
+    else
+    {
+        answer.x1 = (-b + sqrtD)/2/a;
+        answer.x2 = (-b - sqrtD)/2/a;
+    }
     answer.count = 2;
     return answer;
 }
 
 /**
 Функция для решения линейного уравнения.
-\param k, b
+\param k, b {коэффициенты линейного уравнения}
 \return структуру lin, содержащую количество корней и значения. Если корней бесконечно или 0, корень нулевой.
 */
 struct lin lin_solve(double k, double b)
