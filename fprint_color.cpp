@@ -41,3 +41,16 @@ int fprintf_color(FILE* output, console_text_colors color, const char* str, ...)
     }
     return n;
 }
+
+void my_own_assert(int line, const char* file, int condition, const char* format, ...)
+{
+    if (condition)
+        return;
+    va_list ap;
+    va_start(ap, format);
+    fprintf(stderr,"%s", color_codes[console_text_red]);
+    fprintf(stderr, "%s:%d ", file, line);
+    vfprintf(stderr, format, ap);
+    fprintf(stderr,"%s", color_codes[console_text_standart]);
+    abort();
+}

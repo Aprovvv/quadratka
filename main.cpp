@@ -14,6 +14,10 @@
 #include "language.h"
 #include "fprint_color.h"
 
+#ifdef _WIN32
+#error Программа не портирована для Windows. Пожалуйста установите Linux, чтобы насладиться этой прекрасной программой
+#endif
+
 const char flags[] = "hfe";
 const int ROOT_SIGN_COUNT = 3;                 //число знаков после запятой при выводе корней
 extern const struct print_data phrases[2];
@@ -86,12 +90,13 @@ static void print_roots(const struct quad r)
         break;
     case INF_ROOTS:
         printf("%s", phrases[lang_flag].pr_inf_roots);
+        //ASSERT(0, "Ошибка: неожиданное число корней, равное %d\n", r.count);
         break;
     case OVERFLOW_ERR:
         fprintf_color(stderr, console_text_red, "%s", phrases[lang_flag].inf_or_nan);
         break;
     default:
-        assert("Ошибка: неожиданное число корней" && 0);
+        ASSERT(0, "Ошибка: неожиданное число корней, равное %d\n", r.count);
     }
 }
 

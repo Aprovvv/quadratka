@@ -25,4 +25,7 @@ enum console_text_colors
 };
 
 int fprintf_color(FILE* output, console_text_colors color, const char* str, ...);
+void my_own_assert(int line, const char* file, int condition, const char* format, ...);
+
+#define ASSERT(...) my_own_assert(__LINE__, __FILE__, __VA_ARGS__)
 #endif
