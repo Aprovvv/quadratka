@@ -2,7 +2,7 @@
 extern const struct print_data phrases[2] =
 {
     {
-        .pr_fl_err = "Ошибка: неопознанный флаг",
+        .pr_fl_err = "Ошибка: неопознанный флаг\n",
         .pr_numb = "Введите число\n",
         .pr_menu = "Для решения уравнения вида ax^2+bx+c=0 введите коэффициенты a, b и c:\n"
                    "Для завершения введите EOF\n",
@@ -28,7 +28,7 @@ extern const struct print_data phrases[2] =
         .inf_or_nan = "Ошибка: при вычислениях возникли INF или NaN"
     },
     {
-        .pr_fl_err = "Error: unidentifined flag",
+        .pr_fl_err = "Error: unidentifined flag\n",
         .pr_numb = "Enter a number\n",
         .pr_menu = "To solve the equation of the form ax^2+bx+c=0 enter coefficients a, b и c:\n"
                    "To escape print EOF\n",

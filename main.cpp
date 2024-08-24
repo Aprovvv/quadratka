@@ -88,7 +88,7 @@ static void print_roots(const struct quad r)
         printf("%s", phrases[lang_flag].pr_inf_roots);
         break;
     case OVERFLOW_ERR:
-        fprintf_color(stderr, CONSOLE_COLOR_RED, "%s", phrases[lang_flag].inf_or_nan);
+        fprintf_color(stderr, console_text_red, "%s", phrases[lang_flag].inf_or_nan);
         break;
     default:
         assert("Ошибка: неожиданное число корней" && 0);
@@ -113,7 +113,6 @@ static int start_filetest(void)
     char filename[PATH_MAX] = "";
     do
     {
-        strcpy(filename, "");
         printf("%s", phrases[lang_flag].pr_filename);
         if(sget(filename, PATH_MAX))
             return 1;
@@ -168,7 +167,7 @@ static void arg_analyze(int argc, char** argv)
             lang_flag = 1;
             break;
         default:
-            fprintf_color(stderr, CONSOLE_COLOR_RED, phrases[lang_flag].pr_fl_err);
+            fprintf_color(stderr, console_text_red, phrases[lang_flag].pr_fl_err);
             print_help();
         }
     }

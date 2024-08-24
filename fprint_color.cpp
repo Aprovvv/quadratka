@@ -3,22 +3,41 @@
 #include <stdarg.h>
 #include "fprint_color.h"
 
-int fprintf_color(FILE* output, const char* color_code, const char* str, ...)
+static const char* color_codes[] =
 {
-    int n=0;
+    "\033[39m",
+    "\033[30m",
+    "\033[31m",
+    "\033[32m",
+    "\033[33m",
+    "\033[34m",
+    "\033[35m",
+    "\033[36m",
+    "\033[37m",
+    "\033[90m",
+    "\033[91m",
+    "\033[92m",
+    "\033[93m",
+    "\033[94m",
+    "\033[95m",
+    "\033[96m",
+    "\033[97m"
+};
+
+int fprintf_color(FILE* output, console_text_colors color, const char* str, ...)
+{
+    int n = 0;
     va_list ap;
     va_start(ap, str);
     if (isatty(fileno(output)))
     {
-        fprintf(output,"%s", color_code);
+        fprintf(output,"%s", color_codes[color]);
         n = vfprintf(output, str, ap);
-        fprintf(output, CONSOLE_COLOR_STANDART "\n");
+        fprintf(output, "%s", color_codes[console_text_standart]);
     }
     else
     {
-        fprintf(output,"%s", color_code);
         n = vfprintf(output, str, ap);
-        fprintf(output, CONSOLE_COLOR_STANDART "\n");
     }
     return n;
 }
