@@ -4,7 +4,7 @@
 
 static const double EPS_COEF = 1e-7;
 
-enum root_count {INF_ROOTS = -1, ZERO_ROOTS, ONE_ROOT, TWO_ROOTS};
+enum root_count {OVERFLOW_ERR = -2, INF_ROOTS, ZERO_ROOTS, ONE_ROOT, TWO_ROOTS};
 
 /**
  * Структура для хранения решений квадратного уравнения

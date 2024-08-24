@@ -5,15 +5,17 @@
 #include "quadlin.h"
 #include <assert.h>
 
+// iee754 floating point
 struct quad quad_solve(double a, double b, double c, int root_sign_count)
 {
-    assert(isfinite(a));
-    assert(isfinite(b));
-    assert(isfinite(c));
-
     double D = b*b - 4*a*c;
     struct quad answer = {};
 
+    if (!isfinite(a) && !isfinite(b) && !isfinite(c))
+    {
+        answer.count = OVERFLOW_ERR;
+        return answer;
+    }
      //случай нет корней
     if (D < 0)
     {
@@ -29,6 +31,11 @@ struct quad quad_solve(double a, double b, double c, int root_sign_count)
         {
             answer.count = 1;
             answer.x1 = lin_ans.x;
+            if (!isfinite(answer.x1))
+            {
+                answer.count = OVERFLOW_ERR;
+                return answer;
+            }
             return answer;
         }
         else
@@ -54,6 +61,11 @@ struct quad quad_solve(double a, double b, double c, int root_sign_count)
     {
         answer.x1 = (-b + sqrtD)/2/a;
         answer.x2 = (-b - sqrtD)/2/a;
+    }
+    if (!isfinite(answer.x1) || !isfinite(answer.x2))
+    {
+        answer.count = OVERFLOW_ERR;
+        return answer;
     }
     answer.count = 2;
     return answer;

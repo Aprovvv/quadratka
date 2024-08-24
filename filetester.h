@@ -6,7 +6,4 @@
  * \param filename {Имя файла для открытия.}
  */
 int filetester(const char* filename);
-#define GREEN "\033[92m"
-#define RED "\033[91m"
-#define STANDART "\033[39m"
 #endif

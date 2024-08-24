@@ -6,7 +6,7 @@
 
 int analyse_flag(const char* flag, const char* all_flags, size_t size)
 {
-    for(size_t i = 0; i < size; i++)
+    for(size_t i = 0; i < size-1; i++)
     {
         if (all_flags[i] == flag[1] && flag[0] == '-')
             return flag[1];

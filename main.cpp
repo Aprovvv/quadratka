@@ -7,13 +7,16 @@
 #include <string.h>
 #include <limits.h>
 #include <unistd.h>
+#include <stdarg.h>
 #include "quadlin.h"
 #include "filetester.h"
 #include "flag.h"
 #include "language.h"
+#include "fprint_color.h"
 
-const char* flags = "hfe";
-const int ROOT_SIGN_COUNT = 3;          //число знаков после запятой при выводе корней
+const char flags[] = "hfe";
+const int ROOT_SIGN_COUNT = 3;                 //число знаков после запятой при выводе корней
+extern const struct print_data phrases[2];
 
 static void print_menu(void);                  //функция которая выдает приглашение на ввод
 static void print_roots(const struct quad);    //функция которая печатает корни
@@ -84,6 +87,9 @@ static void print_roots(const struct quad r)
     case INF_ROOTS:
         printf("%s", phrases[lang_flag].pr_inf_roots);
         break;
+    case OVERFLOW_ERR:
+        fprintf_color(stderr, CONSOLE_COLOR_RED, "%s", phrases[lang_flag].inf_or_nan);
+        break;
     default:
         assert("Ошибка: неожиданное число корней" && 0);
     }
@@ -148,7 +154,7 @@ static void arg_analyze(int argc, char** argv)
 {
     for (int i = 1; i < argc; i++)
     {
-        int n = analyse_flag(argv[i], flags, strlen(flags));
+        int n = analyse_flag(argv[i], flags, sizeof(flags));
         switch (n)
         {
         case 'h':
@@ -162,14 +168,7 @@ static void arg_analyze(int argc, char** argv)
             lang_flag = 1;
             break;
         default:
-            if (isatty(2))
-            {
-                fprintf(stderr, RED "%s \"%c\"\n" STANDART, phrases[lang_flag].pr_fl_err, n);
-            }
-            else
-            {
-                fprintf(stderr, "%s \"%c\"\n", phrases[lang_flag].pr_fl_err, n);
-            }
+            fprintf_color(stderr, CONSOLE_COLOR_RED, phrases[lang_flag].pr_fl_err);
             print_help();
         }
     }

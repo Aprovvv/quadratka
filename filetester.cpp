@@ -3,16 +3,16 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include "quadlin.h"
-#include "filetester.h"
 #include <errno.h>
 #include <locale.h>
 #include <unistd.h>
+#include "quadlin.h"
+#include "filetester.h"
 #include "language.h"
+#include "fprint_color.h"
 
 extern int lang_flag;
-
-#define PRINT_COLOR(c, x) printf(c x STANDART)
+extern const struct print_data phrases[2];
 
 const int ROOT_SIGN_COUNT = 3;
 
@@ -26,7 +26,7 @@ int filetester(const char* filename)
     if (errno != 0)
     {
         if (isatty(2))
-            fprintf(stderr, RED "%s %s\n" STANDART, phrases[lang_flag].pr_file_nopen, strerror(errno));
+            fprintf(stderr, CONSOLE_COLOR_RED "%s %s\n" CONSOLE_COLOR_STANDART, phrases[lang_flag].pr_file_nopen, strerror(errno));
         else
             fprintf(stderr, "%s %s\n", phrases[lang_flag].pr_file_nopen, strerror(errno));
         errno = 0;
@@ -44,12 +44,7 @@ int filetester(const char* filename)
     {
         line++;
         if (scan_count != 6)
-        {
-            if (isatty(2))
-                fprintf(stderr, RED "%s %d\n" STANDART, phrases[lang_flag].pr_read_err, line);
-            else
-                fprintf(stderr, "%s %d\n", phrases[lang_flag].pr_read_err, line);
-        }
+            fprintf_color(stderr, CONSOLE_COLOR_RED, "%s %d\n", phrases[lang_flag].pr_read_err, line);
         func_answer = quad_solve(a_coef, b_coef, c_coef, ROOT_SIGN_COUNT);
         if (quad_equal(file_answer, func_answer, pow(10, -ROOT_SIGN_COUNT)) == 0)
         {
@@ -58,8 +53,7 @@ int filetester(const char* filename)
         }
     }
     if (all_correct)
-        printf(GREEN "%s" STANDART, phrases[lang_flag].pr_test_pass);
-        //PRINT_COLOR(GREEN, "Все тесты успешно пройдены!\n\n");
+        fprintf_color(stdout, CONSOLE_COLOR_GREEN, "%s", phrases[lang_flag].pr_test_pass);
     fclose(fp);
     return 0;//
 }
@@ -84,7 +78,7 @@ static int quad_equal (struct quad a, struct quad b, double eps)
 static void print_test_error(struct quad file_answer, struct quad func_answer, int line)
 {
 
-    printf(RED "%s %i\n", phrases[lang_flag].pr_test_err, line);
-    printf("%s %i %.*f %.*f\n", phrases[lang_flag].pr_exp, file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
-    printf("%s %i %.*f %.*f\n\n" STANDART, phrases[lang_flag].pr_res, func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);
+    fprintf_color(stdout, CONSOLE_COLOR_RED, "%s %i\n", phrases[lang_flag].pr_test_err, line);
+    fprintf_color(stdout, CONSOLE_COLOR_RED, "%s %i %.*f %.*f\n", phrases[lang_flag].pr_exp, file_answer.count, ROOT_SIGN_COUNT, file_answer.x1, ROOT_SIGN_COUNT, file_answer.x2);
+    fprintf_color(stdout, CONSOLE_COLOR_RED, "%s %i %.*f %.*f\n\n", phrases[lang_flag].pr_res, func_answer.count, ROOT_SIGN_COUNT, func_answer.x1, ROOT_SIGN_COUNT, func_answer.x2);
 }
