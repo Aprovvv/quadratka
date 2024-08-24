@@ -6,17 +6,12 @@
 #include <assert.h>
 #include <string.h>
 #include <limits.h>
-#include <unistd.h>
 #include <stdarg.h>
 #include "quadlin.h"
 #include "filetester.h"
 #include "flag.h"
 #include "language.h"
 #include "fprint_color.h"
-
-#ifdef _WIN32
-#error Программа не портирована для Windows. Пожалуйста установите Linux, чтобы насладиться этой прекрасной программой
-#endif
 
 const char flags[] = "hfe";
 const int ROOT_SIGN_COUNT = 3;                 //число знаков после запятой при выводе корней
@@ -28,7 +23,7 @@ static void clean_buf(void);                   //функция для очис�
 static void print_help(void);                  //выводит справку флага -h
 static int start_filetest(void);               //вызывает тестирование из файла (флаг -f)
 static int sget(char* str, int sizasserte);    //функция для чтения строки без \n на конце
-static void arg_analyze(int argc, char** argv);
+static void arg_analyze(int argc, char** argv);//проходится по всем argv и выбирает, чо с ними делать
 
 int lang_flag = 0;//[lang_flag]
 
@@ -154,6 +149,12 @@ static int sget (char* str, int size)
     return 0;
 }
 
+/**
+ * Функция проходится по всем argv и выбирает, вызывает analyse_flag и вызывает
+ * соответствующие функции при опознанных флагах
+ * \param argc {Копия argc из main}
+ * \param argv {Копия argv из main}
+ */
 static void arg_analyze(int argc, char** argv)
 {
     for (int i = 1; i < argc; i++)

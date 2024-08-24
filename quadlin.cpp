@@ -71,11 +71,6 @@ struct quad quad_solve(double a, double b, double c, int root_sign_count)
     return answer;
 }
 
-/**
-Функция для решения линейного уравнения.
-\param k, b {коэффициенты линейного уравнения}
-\return структуру lin, содержащую количество корней и значения. Если корней бесконечно или 0, корень нулевой.
-*/
 struct lin lin_solve(double k, double b)
 {
     struct lin answer = {};

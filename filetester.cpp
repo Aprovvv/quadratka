@@ -5,7 +5,6 @@
 #include <string.h>
 #include <errno.h>
 #include <locale.h>
-#include <unistd.h>
 #include "quadlin.h"
 #include "filetester.h"
 #include "language.h"
