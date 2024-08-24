@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include "quadlin.h"
-#include <assert.h>
 
 // iee754 floating point
 struct quad quad_solve(double a, double b, double c, int root_sign_count)
@@ -54,13 +53,13 @@ struct quad quad_solve(double a, double b, double c, int root_sign_count)
     //случай 2 корня
     if (a > 0)
     {
-        answer.x1 = (-b - sqrtD)/2/a;
-        answer.x2 = (-b + sqrtD)/2/a;
+        answer.x1 = (-b - sqrtD)/(2*a);
+        answer.x2 = (-b + sqrtD)/(2*a);
     }
     else
     {
-        answer.x1 = (-b + sqrtD)/2/a;
-        answer.x2 = (-b - sqrtD)/2/a;
+        answer.x1 = (-b + sqrtD)/(2*a);
+        answer.x2 = (-b - sqrtD)/(2*a);
     }
     if (!isfinite(answer.x1) || !isfinite(answer.x2))
     {

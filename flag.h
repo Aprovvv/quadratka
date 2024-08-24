@@ -9,5 +9,4 @@
  * \param size {длина строки all_flags.}
  */
 int analyse_flag(const char* flag, const char* opts, size_t size);
-//функция, которая анализирует аргументы командной строки
 #endif
