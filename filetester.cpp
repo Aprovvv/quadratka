@@ -8,7 +8,7 @@
 #include "quadlin.h"
 #include "filetester.h"
 #include "language.h"
-#include "color_print.h"
+#include "color_print/color_print.h"
 
 extern int lang_flag;
 extern const struct print_data phrases[2];

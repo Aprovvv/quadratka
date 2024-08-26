@@ -7,7 +7,7 @@
 #include "filetester.h"
 #include "flag.h"
 #include "language.h"
-#include "color_print.h"
+#include "color_print/color_print.h"
 
 const char flags[] = "hfe";
 const int ROOT_SIGN_COUNT = 3;                 //число знаков после запятой при выводе корней
@@ -21,7 +21,7 @@ static int start_filetest(void);               //вызывает тестиро
 static int sget(char* str, int sizasserte);    //функция для чтения строки без \n на конце
 static void arg_analyze(int argc, char** argv);//проходится по всем argv и выбирает, чо с ними делать
 
-int lang_flag = 0;//[lang_flag]
+int lang_flag = 0;//переменная, отвечающая за язык
 
 int main(int argc, char** argv)
 {
@@ -80,7 +80,7 @@ static void print_roots(const struct quad r)
         break;
     case INF_ROOTS:
         printf("%s", phrases[lang_flag].pr_inf_roots);
-        //ASSERT(0, "Ошибка: неожиданное число корней, равное %d\n", r.count);
+        ASSERT(0, "Ошибка: неожиданное число корней, равное %d\n", r.count);
         break;
     case OVERFLOW_ERR:
         fprintf_color(stderr, CONSOLE_TEXT_RED, "%s", phrases[lang_flag].inf_or_nan);

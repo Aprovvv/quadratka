@@ -39,9 +39,10 @@ int fprintf_color(FILE* output, console_text_colors color, const char* str, ...)
     n = vfprintf_color(output, color, str, ap);
     return n;
 }
-
+//TODO вывод условия
 void assert_but_better(int line, const char* file, int condition, const char* format, ...)
 {
+#ifndef NDEBUG
     if (condition)
         return;
     va_list ap;
@@ -49,6 +50,7 @@ void assert_but_better(int line, const char* file, int condition, const char* fo
     fprintf_color(stderr, CONSOLE_TEXT_RED, "%s:%d ", file, line);
     vfprintf_color(stderr, CONSOLE_TEXT_RED, format, ap);
     abort();
+#endif
 }
 
 static const char* switch_color_code(console_text_colors color)
