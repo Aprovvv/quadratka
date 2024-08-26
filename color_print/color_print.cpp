@@ -40,7 +40,7 @@ int fprintf_color(FILE* output, console_text_colors color, const char* str, ...)
     return n;
 }
 //TODO вывод условия
-void assert_but_better(int line, const char* file, int condition, const char* format, ...)
+void assert_but_better(int line, const char* file, const char* text_condition, int condition, const char* format, ...)
 {
 #ifndef NDEBUG
     if (condition)
@@ -48,6 +48,7 @@ void assert_but_better(int line, const char* file, int condition, const char* fo
     va_list ap;
     va_start(ap, format);
     fprintf_color(stderr, CONSOLE_TEXT_RED, "%s:%d ", file, line);
+    fprintf_color(stderr, CONSOLE_TEXT_RED, "Не выполнилось условие %s ", text_condition);
     vfprintf_color(stderr, CONSOLE_TEXT_RED, format, ap);
     abort();
 #endif

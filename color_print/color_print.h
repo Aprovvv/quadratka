@@ -41,7 +41,7 @@ int fprintf_color(FILE* output, console_text_colors color, const char* str, ...)
  * \param format {Строка форматирования}
  * \param ... {Другие аргументы, которые надо вывести}
  */
-void assert_but_better(int line, const char* file, int condition, const char* format, ...);
+void assert_but_better(int line, const char* file, const char* text_condition, int condition, const char* format, ...);
 
 /**
  * Используется для удобного вызова my_own_assert.
@@ -51,5 +51,5 @@ void assert_but_better(int line, const char* file, int condition, const char* fo
  */
 
 int vfprintf_color(FILE* output, console_text_colors color, const char* str, va_list ap);
-#define ASSERT(...) assert_but_better(__LINE__, __FILE__, __VA_ARGS__)
+#define ASSERT(x, ...) assert_but_better(__LINE__, __FILE__, #x, x, __VA_ARGS__)
 #endif

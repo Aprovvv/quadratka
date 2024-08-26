@@ -80,7 +80,7 @@ static void print_roots(const struct quad r)
         break;
     case INF_ROOTS:
         printf("%s", phrases[lang_flag].pr_inf_roots);
-        ASSERT(0, "Ошибка: неожиданное число корней, равное %d\n", r.count);
+        //ASSERT(1==2, "Ошибка: неожиданное число корней, равное %d\n", r.count);
         break;
     case OVERFLOW_ERR:
         fprintf_color(stderr, CONSOLE_TEXT_RED, "%s", phrases[lang_flag].inf_or_nan);
