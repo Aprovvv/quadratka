@@ -9,7 +9,7 @@
 #include "language.h"
 #include "color_print/color_print.h"
 
-const char flags[] = "hfe";
+const char flags[] = "h/help;f/filetest/test/t;e/eng/english";
 const int ROOT_SIGN_COUNT = 3;                 //число знаков после запятой при выводе корней
 extern const struct print_data phrases[2];
 
@@ -80,13 +80,13 @@ static void print_roots(const struct quad r)
         break;
     case INF_ROOTS:
         printf("%s", phrases[lang_flag].pr_inf_roots);
-        //ASSERT(1==2, "Ошибка: неожиданное число корней, равное %d\n", r.count);
+        ASSERT_BUT_BETTER(1==2, "Ошибка: неожиданное число корней, равное %d\n", r.count);
         break;
     case OVERFLOW_ERR:
         fprintf_color(stderr, CONSOLE_TEXT_RED, "%s", phrases[lang_flag].inf_or_nan);
         break;
     default:
-        ASSERT(0, "Ошибка: неожиданное число корней, равное %d\n", r.count);
+        ASSERT_BUT_BETTER(0, "Ошибка: неожиданное число корней, равное %d\n", r.count);
     }
 }
 

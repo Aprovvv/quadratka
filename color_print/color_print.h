@@ -51,5 +51,9 @@ void assert_but_better(int line, const char* file, const char* text_condition, i
  */
 
 int vfprintf_color(FILE* output, console_text_colors color, const char* str, va_list ap);
-#define ASSERT(x, ...) assert_but_better(__LINE__, __FILE__, #x, x, __VA_ARGS__)
+#ifndef NDEBUG
+#define ASSERT_BUT_BETTER(x, s, ...) assert_but_better(__LINE__, __FILE__, #x, x, s, __VA_ARGS__)
+#else
+#define ASSERT_BUT_BETTER
+#endif
 #endif
