@@ -9,9 +9,11 @@
 #include "language.h"
 #include "color_print/color_print.h"
 
-const char flags[] = "h/help;f/filetest/test/t;e/eng/english";
+//const char flags[] = "h/help;f/filetest/test/t;e/eng/english";
 const int ROOT_SIGN_COUNT = 3;                 //число знаков после запятой при выводе корней
 extern const struct print_data phrases[2];
+const struct flag_struct flags[3] =
+{ {'h', "help"}, {'t', "test"}, {'e', "english"} };
 
 static void print_menu(void);                  //функция которая выдает приглашение на ввод
 static void print_roots(const struct quad);    //функция которая печатает корни
@@ -29,7 +31,6 @@ int main(int argc, char** argv)
     double a_coef = 0, b_coef = 0, c_coef = 0;
     int scan_return = 0;
     struct quad root = {};
-
     print_menu();
 
     while((scan_return = scanf("%lf %lf %lf", &a_coef, &b_coef, &c_coef)) != EOF)
@@ -154,13 +155,13 @@ static void arg_analyze(int argc, char** argv)
 {
     for (int i = 1; i < argc; i++)
     {
-        int n = analyse_flag(argv[i], flags, sizeof(flags));
-        switch (n)
+        int flag = analyze_flag(flags, (double)sizeof(flags)/sizeof(struct flag_struct), argv[i]);
+        switch (flag)
         {
         case 'h':
             print_help();
             break;
-        case 'f':
+        case 't':
             if(start_filetest())
                 exit(EXIT_SUCCESS);
             break;
