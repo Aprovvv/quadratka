@@ -155,7 +155,7 @@ static void arg_analyze(int argc, char** argv)
 {
     for (int i = 1; i < argc; i++)
     {
-        int flag = analyze_flag(flags, (double)sizeof(flags)/sizeof(struct flag_struct), argv[i]);
+        int flag = analyze_flag(flags, sizeof(flags)/sizeof(struct flag_struct), argv[i]);
         switch (flag)
         {
         case 'h':
