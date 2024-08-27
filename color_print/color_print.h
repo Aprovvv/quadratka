@@ -42,16 +42,22 @@ int fprintf_color(FILE* output, console_text_colors color, const char* str, ...)
  * \param ... {Другие аргументы, которые надо вывести}
  */
 void assert_but_better(int line, const char* file, const char* text_condition, int condition, const char* format, ...);
+/**
+ * Аналог функции vfprintf, но с цветом.
+ * \param output {Указатель на файл вывода}
+ * \param color {цвет}
+ * \param str {строка форматирования}
+ * \param ap {va_list с остальными аргументами}
+ */
+int vfprintf_color(FILE* output, console_text_colors color, const char* str, va_list ap);
 
+#ifndef NDEBUG
 /**
  * Используется для удобного вызова my_own_assert.
  * \param condition {Условие, при невыполнении которого выводится ошибка}
  * \param format {Строка форматирования}
  * \param ... {Другие аргументы, которые надо вывести}
  */
-
-int vfprintf_color(FILE* output, console_text_colors color, const char* str, va_list ap);
-#ifndef NDEBUG
 #define ASSERT_BUT_BETTER(x, s, ...) assert_but_better(__LINE__, __FILE__, #x, x, s, __VA_ARGS__)
 #else
 #define ASSERT_BUT_BETTER

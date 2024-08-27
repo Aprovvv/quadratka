@@ -39,7 +39,7 @@ int fprintf_color(FILE* output, console_text_colors color, const char* str, ...)
     n = vfprintf_color(output, color, str, ap);
     return n;
 }
-//TODO вывод условия
+
 void assert_but_better(int line, const char* file, const char* text_condition, int condition, const char* format, ...)
 {
     if (condition)

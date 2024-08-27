@@ -4,7 +4,6 @@
 #include <math.h>
 #include "quadlin.h"
 
-// iee754 floating point
 struct quad quad_solve(double a, double b, double c, int root_sign_count)
 {
     double D = b*b - 4*a*c;
