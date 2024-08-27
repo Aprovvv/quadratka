@@ -9,4 +9,4 @@
 
 Пожалуйста.
 
-![Архивное фото автора проекта во время его написания](https://ya.ru/images/search?img_url=https%3A%2F%2F2ch.hk%2Fb%2Fsrc%2F306455741%2F17192552314440.jpg&lr=76&pos=0&rpt=simage&source=serp&text=%D1%87%D0%BC%D0%BE%D0%BD%D1%8F)
+![Архивное фото автора проекта во время его написания](chmonya.jpg)
